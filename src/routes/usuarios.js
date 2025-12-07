@@ -27,7 +27,7 @@ const usuarioController = require('../controller/usuarios');
  * data_nascimento:
  * type: string
  * format: date
- * description: Data de nascimento do novo usuário (AAAA-MM-DD)
+ * description: Data de nascimento (AAAA-MM-DD)
  * responses:
  * 201:
  * description: Usuário criado com sucesso.
@@ -35,5 +35,8 @@ const usuarioController = require('../controller/usuarios');
  * description: Falha ao criar o usuário.
  */
 router.post('/usuarios', usuarioController.criarUsuario);
+
+// Rota de Login (Nova)
+router.post('/login', usuarioController.login);
 
 module.exports = router;

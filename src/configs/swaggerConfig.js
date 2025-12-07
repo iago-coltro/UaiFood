@@ -1,8 +1,9 @@
 const swaggerJsdoc = require('swagger-jsdoc');
+const path = require('path');
 
 const swaggerOptions = {
   definition: {
-    openapi: '3.0.0', // Corrigido aspas que faltavam no PDF
+    openapi: '3.0.0',
     info: {
       title: 'API de Exemplo com Swagger',
       version: '1.0.0',
@@ -14,8 +15,9 @@ const swaggerOptions = {
       },
     ],
   },
-  // Caminho para os arquivos que contêm as anotações do Swagger
-  apis: ['./src/routes/*.js'], 
+  // Usa 'path.join' para garantir que ache a pasta routes
+  // __dirname pega a pasta atual (src/configs) e sobe um nível (..) para entrar em routes
+  apis: [path.join(__dirname, '../routes/*.js')], 
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
