@@ -1,13 +1,12 @@
 const swaggerJsdoc = require('swagger-jsdoc');
-const path = require('path');
 
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'API de Exemplo com Swagger',
+      title: 'API UaiFood',
       version: '1.0.0',
-      description: 'API para exemplo de documentação Swagger',
+      description: 'Documentação da API de Delivery',
     },
     servers: [
       {
@@ -15,9 +14,8 @@ const swaggerOptions = {
       },
     ],
   },
-  // Usa 'path.join' para garantir que ache a pasta routes
-  // __dirname pega a pasta atual (src/configs) e sobe um nível (..) para entrar em routes
-  apis: [path.join(__dirname, '../routes/*.js')], 
+  // MUDANÇA IMPORTANTE: Use o caminho relativo direto a partir da raiz do projeto
+  apis: ['./src/routes/*.js'], 
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);

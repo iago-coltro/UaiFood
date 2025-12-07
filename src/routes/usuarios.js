@@ -8,6 +8,8 @@ const usuarioController = require('../controller/usuarios');
  * post:
  * summary: Cria um novo usuário
  * description: Adiciona um novo usuário ao sistema com base nas informações fornecidas.
+ * tags: 
+ * - Usuários
  * requestBody:
  * required: true
  * content:
@@ -17,17 +19,13 @@ const usuarioController = require('../controller/usuarios');
  * properties:
  * nome:
  * type: string
- * description: Nome do novo usuário
  * email:
  * type: string
- * description: E-mail do novo usuário
  * senha:
  * type: string
- * description: Senha do novo usuário
  * data_nascimento:
  * type: string
  * format: date
- * description: Data de nascimento (AAAA-MM-DD)
  * responses:
  * 201:
  * description: Usuário criado com sucesso.
@@ -36,7 +34,33 @@ const usuarioController = require('../controller/usuarios');
  */
 router.post('/usuarios', usuarioController.criarUsuario);
 
-// Rota de Login (Nova)
+/**
+ * @swagger
+ * /login:
+ * post:
+ * summary: Autentica um usuário e retorna um Token JWT
+ * description: Verifica email e senha para liberar acesso.
+ * tags: 
+ * - Autenticação
+ * requestBody:
+ * required: true
+ * content:
+ * application/json:
+ * schema:
+ * type: object
+ * properties:
+ * email:
+ * type: string
+ * example: maria@daw.com
+ * senha:
+ * type: string
+ * example: senhaSegura123
+ * responses:
+ * 200:
+ * description: Login realizado com sucesso (Retorna Token).
+ * 401:
+ * description: Credenciais inválidas.
+ */
 router.post('/login', usuarioController.login);
 
 module.exports = router;
