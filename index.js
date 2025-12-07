@@ -5,6 +5,7 @@ const app = express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocs = require('./src/configs/swaggerConfig'); 
 const usuarioRoutes = require('./src/routes/usuarios');
+const PORT = 3000;
 
 app.use(express.json());
 
@@ -29,7 +30,16 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-const PORT = 3000;
+// Página de Login
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+// Página de Cadastro
+app.get('/cadastro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'cadastro.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
   console.log(`Acesse: http://localhost:${PORT}`);

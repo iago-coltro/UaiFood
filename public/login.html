@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - UaiFood</title>
+    <style>
+        /* Estilos Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #fdfbf7; color: #333; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        
+        .login-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-container h2 { color: #ea1d2c; margin-bottom: 1.5rem; }
+        
+        .form-group { margin-bottom: 1rem; text-align: left; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            background-color: #ea1d2c;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .btn:hover { background-color: #c91b26; }
+
+        /* Botão Secundário (Novo) */
+        .btn-outline {
+            background-color: transparent;
+            color: #ea1d2c;
+            border: 2px solid #ea1d2c;
+            margin-top: 10px;
+        }
+        .btn-outline:hover { background-color: #fff0f0; }
+
+        .back-link { display: block; margin-top: 1rem; color: #666; text-decoration: none; font-size: 0.9rem; }
+        .back-link:hover { color: #ea1d2c; }
+
+        .error { color: red; font-size: 0.9rem; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Entrar no UaiFood 🧀</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" required placeholder="seu@email.com">
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" required placeholder="Sua senha">
+            </div>
+            
+            <button type="submit" class="btn">Entrar</button>
+            
+            <a href="/cadastro">
+                <button type="button" class="btn btn-outline">Criar nova conta</button>
+            </a>
+            
+            <p id="errorMessage" class="error"></p>
+        </form>
+        <a href="/" class="back-link">Voltar para a Home</a>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const errorMsg = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, senha })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    alert('Login realizado com sucesso!');
+                    window.location.href = '/'; 
+                } else {
+                    errorMsg.textContent = data.error || 'Erro ao fazer login';
+                    errorMsg.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                errorMsg.textContent = 'Erro de conexão com o servidor.';
+                errorMsg.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
