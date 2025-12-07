@@ -4,6 +4,12 @@ const usuarioRoutes = require('./src/routes/usuarios'); // Importa as rotas
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log("Header Content-Type:", req.headers['content-type']);
+  console.log("Body recebido:", req.body);
+  next();
+});
+
 // Usa as rotas importadas
 app.use(usuarioRoutes);
 
