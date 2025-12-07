@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
-const usuarioRoutes = require('./src/routes/usuarios'); // Importa as rotas
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./src/configs/swaggerConfig'); 
+
+const usuarioRoutes = require('./src/routes/usuarios');
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  console.log("Header Content-Type:", req.headers['content-type']);
-  console.log("Body recebido:", req.body);
-  next();
-});
+// Rota para a documentação do Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // [cite: 56]
 
 // Usa as rotas importadas
 app.use(usuarioRoutes);
