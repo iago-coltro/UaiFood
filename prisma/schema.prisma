@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Seu modelo original (com adição dos relacionamentos 'pedidos' e 'enderecos')
+model Usuario {
+  id              Int        @id @default(autoincrement())
+  nome            String
+  email           String     @unique
+  senha           String
+  data_nascimento DateTime
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  
+  // Relacionamentos
+  enderecos       Endereco[]
+  pedidos         Pedido[]
+}
+
+model Endereco {
+  id          Int      @id @default(autoincrement())
+  rua         String
+  numero      String
+  bairro      String
+  cidade      String
+  estado      String
+  cep         String
+  complemento String?
+  
+  usuarioId   Int
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id])
+}
+
+model Restaurante {
+  id          Int       @id @default(autoincrement())
+  nome        String
+  descricao   String?
+  foto        String?   // URL da imagem
+  avaliacao   Float     @default(0)
+  
+  // Relacionamentos
+  categoriaId Int
+  categoria   Categoria @relation(fields: [categoriaId], references: [id])
+  cardapio    Produto[]
+  pedidos     Pedido[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Categoria {
+  id           Int           @id @default(autoincrement())
+  nome         String        @unique // Ex: "Lanches", "Mineira", "Japonesa"
+  restaurantes Restaurante[]
+}
+
+model Produto {
+  id            Int         @id @default(autoincrement())
+  nome          String
+  descricao     String?
+  preco         Decimal
+  foto          String?
+  
+  restauranteId Int
+  restaurante   Restaurante @relation(fields: [restauranteId], references: [id])
+  
+  itensPedido   ItemPedido[]
+}
+
+model Pedido {
+  id            Int         @id @default(autoincrement())
+  data          DateTime    @default(now())
+  status        String      @default("PENDENTE") // PENDENTE, PREPARANDO, SAIU_ENTREGA, ENTREGUE
+  total         Decimal
+  
+  usuarioId     Int
+  usuario       Usuario     @relation(fields: [usuarioId], references: [id])
+  
+  restauranteId Int
+  restaurante   Restaurante @relation(fields: [restauranteId], references: [id])
+  
+  itens         ItemPedido[]
+}
+
+model ItemPedido {
+  id         Int      @id @default(autoincrement())
+  quantidade Int
+  precoUnit  Decimal  // Preço no momento da compra (para histórico)
+  
+  pedidoId   Int
+  pedido     Pedido   @relation(fields: [pedidoId], references: [id])
+  
+  produtoId  Int
+  produto    Produto  @relation(fields: [produtoId], references: [id])
+}

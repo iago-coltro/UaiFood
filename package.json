@@ -1,0 +1,27 @@
+{
+  "name": "uaifoor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iago-coltro/UaiFood.git"
+  },
+  "author": "Iago Luciano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iago-coltro/UaiFood/issues"
+  },
+  "homepage": "https://github.com/iago-coltro/UaiFood#readme",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^7.1.0",
+    "express": "^5.2.1",
+    "prisma": "^7.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
