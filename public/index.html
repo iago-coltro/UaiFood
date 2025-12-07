@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UaiFood - Delivery com sabor de Minas</title>
+    <style>
+        /* Reset básico */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body {
+            background-color: #fdfbf7;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #ea1d2c; /* Cor clássica de Food Delivery */
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 { font-size: 1.5rem; font-weight: bold; letter-spacing: 1px; }
+        header nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; }
+        header nav a:hover { text-decoration: underline; }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h2 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; }
+
+        .btn {
+            background-color: #f4c20d; /* Amarelo apetitoso */
+            color: #ea1d2c;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.05); background-color: #ffdb4d; }
+
+        /* Documentação Section */
+        .features {
+            padding: 3rem 2rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .features h3 { color: #ea1d2c; margin-bottom: 1rem; }
+        
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: left;
+        }
+        
+        .card h4 { margin-bottom: 0.5rem; color: #333; }
+        .card p { color: #666; font-size: 0.9rem; }
+        .card a { display: block; margin-top: 1rem; color: #ea1d2c; text-decoration: none; font-weight: bold; }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>UaiFood 🧀</h1>
+        <nav>
+            <a href="/api-docs">Documentação da API</a>
+            <a href="#">Login</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Trem bão é comer bem!</h2>
+        <p>O delivery mais rápido das Minas Gerais. Peça agora e receba quentinho na sua casa.</p>
+        <a href="/api-docs" class="btn">Acessar API e Pedir</a>
+    </section>
+
+    <section class="features">
+        <h3>Desenvolvedores</h3>
+        <p>Esta é uma API RESTful construída com Node.js, Express e Prisma. Confira nossos recursos abaixo:</p>
+
+        <div class="card-container">
+            <div class="card">
+                <h4>Swagger Docs</h4>
+                <p>Explore todos os endpoints disponíveis, esquemas e teste as requisições em tempo real.</p>
+                <a href="/api-docs">Ver Documentação &rarr;</a>
+            </div>
+            
+            <div class="card">
+                <h4>Rotas de Usuários</h4>
+                <p>Gerencie cadastro, login e perfis de clientes de forma segura e rápida.</p>
+                <a href="/api-docs#/default/post_usuarios">Criar Usuário &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 UaiFood. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
