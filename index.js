@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const usuarioRoutes = require('./src/routes/usuarios'); // Importa as rotas
 
-app.get('/', (req, res) => {
-    res.send('API rodando...');
-});
+app.use(express.json());
 
-app.listen(port, () => {
-    console.log(`Servidor roandando na porta:${port}`);
+// Usa as rotas importadas
+app.use(usuarioRoutes);
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
