@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>UAIfood - Carrinho</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #1A1A2E; color: white; padding: 2rem; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #FF6B35; margin-bottom: 2rem; text-align: center; }
+        
+        .cart-item { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .cart-total { font-size: 1.5rem; font-weight: bold; text-align: right; margin: 2rem 0; color: #2EC4B6; }
+        
+        .address-section { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; }
+        select { width: 100%; padding: 10px; background: rgba(255,255,255,0.1); border: none; color: white; border-radius: 8px; margin-top: 10px; }
+        
+        .btn-checkout { width: 100%; padding: 15px; background: #22C55E; border: none; border-radius: 12px; color: white; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
+        .btn-add-addr { background: transparent; border: 1px solid #FF6B35; color: #FF6B35; padding: 5px 10px; border-radius: 5px; cursor: pointer; float: right; font-size: 0.8rem; }
+        
+        .empty-msg { text-align: center; color: #aaa; margin-top: 50px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Seu Carrinho 🛒</h1>
+        
+        <div id="cart-items">
+            </div>
+
+        <div class="cart-total">Total: R$ <span id="total-value">0.00</span></div>
+
+        <div class="address-section">
+            <h3>Onde vamos entregar? <button class="btn-add-addr" onclick="window.location.href='/endereco'">+ Novo Endereço</button></h3>
+            <select id="endereco-select">
+                <option value="" disabled selected>Carregando endereços...</option>
+            </select>
+        </div>
+
+        <button class="btn-checkout" onclick="finalizarPedido()">Finalizar Pedido</button>
+        <div style="text-align:center; margin-top:20px;"><a href="/" style="color:#aaa;">Continuar Comprando</a></div>
+    </div>
+
+    <script>
+        // Simulação de Carrinho (Em um app real, viria do Index)
+        // Para testar, adicione itens manualmente no localStorage do navegador ou use o script no Index
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const totalSpan = document.getElementById('total-value');
+            container.innerHTML = '';
+            
+            if (carrinho.length === 0) {
+                container.innerHTML = '<p class="empty-msg">Seu carrinho está vazio :(</p>';
+                totalSpan.textContent = '0.00';
+                return;
+            }
+
+            let total = 0;
+            carrinho.forEach((item, index) => {
+                const itemTotal = item.preco * item.quantidade;
+                total += itemTotal;
+                
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div>
+                        <strong>${item.nome}</strong><br>
+                        <small>R$ ${item.preco} x ${item.quantidade}</small>
+                    </div>
+                    <div>
+                        <span>R$ ${itemTotal.toFixed(2)}</span>
+                        <button onclick="removeItem(${index})" style="background:none; border:none; cursor:pointer;">🗑️</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            totalSpan.textContent = total.toFixed(2);
+        }
+
+        function removeItem(index) {
+            carrinho.splice(index, 1);
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            renderCart();
+        }
+
+        async function carregarEnderecos() {
+            const token = localStorage.getItem('token');
+            if(!token) return window.location.href = '/login';
+
+            try {
+                const res = await fetch('/enderecos', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const enderecos = await res.json();
+                const select = document.getElementById('endereco-select');
+                
+                if (enderecos.length === 0) {
+                    select.innerHTML = '<option value="">Nenhum endereço cadastrado</option>';
+                } else {
+                    select.innerHTML = '<option value="" disabled selected>Selecione o endereço</option>';
+                    enderecos.forEach(end => {
+                        const opt = document.createElement('option');
+                        opt.value = end.id;
+                        opt.textContent = `${end.rua}, ${end.numero} - ${end.bairro}`;
+                        select.appendChild(opt);
+                    });
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function finalizarPedido() {
+            const token = localStorage.getItem('token');
+            const enderecoId = document.getElementById('endereco-select').value;
+            const total = document.getElementById('total-value').textContent;
+
+            if (!enderecoId) return alert('Por favor, selecione um endereço de entrega.');
+            if (carrinho.length === 0) return alert('Seu carrinho está vazio.');
+
+            // Prepara payload
+            const itens = carrinho.map(c => ({
+                produtoId: c.id, // Supondo que o produto salvo no storage tem ID
+                quantidade: c.quantidade,
+                precoUnit: c.preco
+            }));
+
+            try {
+                const res = await fetch('/pedidos', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        itens,
+                        total,
+                        enderecoId
+                    })
+                });
+
+                if (res.ok) {
+                    alert('Pedido realizado com sucesso! A comida está a caminho 🛵');
+                    localStorage.removeItem('carrinho');
+                    window.location.href = '/';
+                } else {
+                    alert('Erro ao finalizar pedido.');
+                }
+            } catch (error) {
+                alert('Erro de conexão.');
+            }
+        }
+
+        renderCart();
+        carregarEnderecos();
+    </script>
+</body>
+</html>

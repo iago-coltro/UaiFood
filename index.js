@@ -7,6 +7,8 @@ const swaggerDocs = require('./src/configs/swaggerConfig');
 // Importação das Rotas da API
 const usuarioRoutes = require('./src/routes/usuarios');
 const produtoRoutes = require('./src/routes/produtos'); 
+const enderecoRoutes = require('./src/routes/enderecos');
+const pedidoRoutes = require('./src/routes/pedidos');
 const app = express();
 
 // Configurações do Express
@@ -25,6 +27,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 // --- ROTAS DA API ---
 app.use(usuarioRoutes);
 app.use(produtoRoutes);
+app.use(enderecoRoutes); 
+app.use(pedidoRoutes);
 
 // --- ROTAS DE PÁGINAS (FRONTEND) ---
 
@@ -46,6 +50,14 @@ app.get('/cadastro', (req, res) => {
 // 4. Página de Cadastro de Itens (Cardápio)
 app.get('/produtos', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'produtos.html'));
+});
+
+app.get('/endereco', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'endereco.html'));
+});
+
+app.get('/carrinho', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'carrinho.html'));
 });
 
 // Inicialização do Servidor

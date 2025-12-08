@@ -1,12 +1,14 @@
+// prisma/schema.prisma
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  // A URL foi movida para o prisma.config.ts no Prisma 7
 }
 
-// Seu modelo original (com adição dos relacionamentos 'pedidos' e 'enderecos')
 model Usuario {
   id              Int        @id @default(autoincrement())
   nome            String
@@ -33,6 +35,9 @@ model Endereco {
   
   usuarioId   Int
   usuario     Usuario  @relation(fields: [usuarioId], references: [id])
+
+  // Relacionamento inverso (Um endereço pode ter vários pedidos entregues nele)
+  pedidos     Pedido[]
 }
 
 model Restaurante {
@@ -82,6 +87,10 @@ model Pedido {
   
   restauranteId Int
   restaurante   Restaurante @relation(fields: [restauranteId], references: [id])
+
+  // CAMPO NOVO: Endereço de entrega selecionado
+  enderecoId    Int?
+  endereco      Endereco?   @relation(fields: [enderecoId], references: [id])
   
   itens         ItemPedido[]
 }
