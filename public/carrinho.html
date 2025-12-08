@@ -2,160 +2,207 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>UAIfood - Carrinho</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAIfood - Finalizar Pedido</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: #1A1A2E; color: white; padding: 2rem; }
+        body { font-family: 'Poppins', sans-serif; background: #1A1A2E; color: white; padding: 20px; }
         .container { max-width: 800px; margin: 0 auto; }
-        h1 { color: #FF6B35; margin-bottom: 2rem; text-align: center; }
+        h1 { color: #FF6B35; text-align: center; margin-bottom: 30px; }
         
-        .cart-item { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .cart-total { font-size: 1.5rem; font-weight: bold; text-align: right; margin: 2rem 0; color: #2EC4B6; }
+        /* Seções */
+        .section { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .section h3 { margin-bottom: 15px; color: #FF6B35; display: flex; justify-content: space-between; align-items: center; }
         
-        .address-section { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; }
-        select { width: 100%; padding: 10px; background: rgba(255,255,255,0.1); border: none; color: white; border-radius: 8px; margin-top: 10px; }
+        /* Itens */
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .cart-item:last-child { border-bottom: none; }
+        .qty-controls button { background: #FF6B35; border: none; color: white; width: 25px; height: 25px; border-radius: 5px; cursor: pointer; }
+        .qty-controls span { margin: 0 10px; }
+
+        /* Endereço */
+        select { width: 100%; padding: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; }
+        .btn-add { background: transparent; border: 1px solid #FF6B35; color: #FF6B35; padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; }
         
-        .btn-checkout { width: 100%; padding: 15px; background: #22C55E; border: none; border-radius: 12px; color: white; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
-        .btn-add-addr { background: transparent; border: 1px solid #FF6B35; color: #FF6B35; padding: 5px 10px; border-radius: 5px; cursor: pointer; float: right; font-size: 0.8rem; }
-        
-        .empty-msg { text-align: center; color: #aaa; margin-top: 50px; }
+        /* Pagamento */
+        .payment-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .payment-option { cursor: pointer; }
+        .payment-option input { display: none; }
+        .payment-card { border: 1px solid rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; text-align: center; transition: 0.3s; }
+        .payment-card:hover { background: rgba(255,255,255,0.1); }
+        .payment-option input:checked + .payment-card { border-color: #FF6B35; background: rgba(255, 107, 53, 0.1); color: #FF6B35; font-weight: bold; }
+
+        /* Total e Botão */
+        .total-bar { font-size: 1.5rem; font-weight: bold; text-align: right; margin: 20px 0; }
+        .btn-checkout { width: 100%; padding: 18px; background: #22C55E; border: none; border-radius: 12px; color: white; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
+        .btn-checkout:hover { background: #1ca84c; transform: translateY(-2px); }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #aaa; text-decoration: none; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Seu Carrinho 🛒</h1>
-        
-        <div id="cart-items">
-            </div>
 
-        <div class="cart-total">Total: R$ <span id="total-value">0.00</span></div>
+<div class="container">
+    <h1>🛒 Finalizar Pedido</h1>
 
-        <div class="address-section">
-            <h3>Onde vamos entregar? <button class="btn-add-addr" onclick="window.location.href='/endereco'">+ Novo Endereço</button></h3>
-            <select id="endereco-select">
-                <option value="" disabled selected>Carregando endereços...</option>
-            </select>
-        </div>
-
-        <button class="btn-checkout" onclick="finalizarPedido()">Finalizar Pedido</button>
-        <div style="text-align:center; margin-top:20px;"><a href="/" style="color:#aaa;">Continuar Comprando</a></div>
+    <div class="section">
+        <h3>Itens do Pedido</h3>
+        <div id="cart-items"></div>
     </div>
 
-    <script>
-        // Simulação de Carrinho (Em um app real, viria do Index)
-        // Para testar, adicione itens manualmente no localStorage do navegador ou use o script no Index
-        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    <div class="section">
+        <h3>
+            Entrega
+            <button class="btn-add" onclick="window.location.href='/endereco'">+ Novo Endereço</button>
+        </h3>
+        <select id="endereco-select">
+            <option value="" disabled selected>Carregando endereços...</option>
+        </select>
+    </div>
 
-        function renderCart() {
-            const container = document.getElementById('cart-items');
-            const totalSpan = document.getElementById('total-value');
-            container.innerHTML = '';
-            
-            if (carrinho.length === 0) {
-                container.innerHTML = '<p class="empty-msg">Seu carrinho está vazio :(</p>';
-                totalSpan.textContent = '0.00';
-                return;
-            }
+    <div class="section">
+        <h3>Forma de Pagamento</h3>
+        <div class="payment-options">
+            <label class="payment-option">
+                <input type="radio" name="pagamento" value="PIX">
+                <div class="payment-card">💠 PIX</div>
+            </label>
+            <label class="payment-option">
+                <input type="radio" name="pagamento" value="CARTAO">
+                <div class="payment-card">💳 Cartão</div>
+            </label>
+            <label class="payment-option">
+                <input type="radio" name="pagamento" value="DINHEIRO">
+                <div class="payment-card">💵 Dinheiro</div>
+            </label>
+        </div>
+    </div>
 
-            let total = 0;
-            carrinho.forEach((item, index) => {
-                const itemTotal = item.preco * item.quantidade;
-                total += itemTotal;
-                
-                const div = document.createElement('div');
-                div.className = 'cart-item';
-                div.innerHTML = `
+    <div class="total-bar">Total: R$ <span id="total-value">0.00</span></div>
+
+    <button class="btn-checkout" onclick="finalizarPedido()">Concluir Pedido ✅</button>
+    <a href="/" class="back-link">← Continuar Comprando</a>
+</div>
+
+<script>
+    // Carrega carrinho do LocalStorage
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+    // Renderiza Itens
+    function renderCart() {
+        const container = document.getElementById('cart-items');
+        let total = 0;
+        container.innerHTML = '';
+
+        if (carrinho.length === 0) {
+            container.innerHTML = '<p style="text-align:center; color:#888;">Seu carrinho está vazio.</p>';
+            document.getElementById('total-value').innerText = '0.00';
+            return;
+        }
+
+        carrinho.forEach((item, index) => {
+            const subtotal = item.preco * item.quantidade;
+            total += subtotal;
+            container.innerHTML += `
+                <div class="cart-item">
                     <div>
                         <strong>${item.nome}</strong><br>
-                        <small>R$ ${item.preco} x ${item.quantidade}</small>
+                        <small>R$ ${item.preco} un.</small>
                     </div>
-                    <div>
-                        <span>R$ ${itemTotal.toFixed(2)}</span>
-                        <button onclick="removeItem(${index})" style="background:none; border:none; cursor:pointer;">🗑️</button>
+                    <div class="qty-controls">
+                        <button onclick="alterarQtd(${index}, -1)">-</button>
+                        <span>${item.quantidade}</span>
+                        <button onclick="alterarQtd(${index}, 1)">+</button>
                     </div>
-                `;
-                container.appendChild(div);
-            });
-            totalSpan.textContent = total.toFixed(2);
-        }
+                    <div>R$ ${subtotal.toFixed(2)}</div>
+                </div>
+            `;
+        });
+        document.getElementById('total-value').innerText = total.toFixed(2);
+    }
 
-        function removeItem(index) {
-            carrinho.splice(index, 1);
-            localStorage.setItem('carrinho', JSON.stringify(carrinho));
-            renderCart();
-        }
-
-        async function carregarEnderecos() {
-            const token = localStorage.getItem('token');
-            if(!token) return window.location.href = '/login';
-
-            try {
-                const res = await fetch('/enderecos', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const enderecos = await res.json();
-                const select = document.getElementById('endereco-select');
-                
-                if (enderecos.length === 0) {
-                    select.innerHTML = '<option value="">Nenhum endereço cadastrado</option>';
-                } else {
-                    select.innerHTML = '<option value="" disabled selected>Selecione o endereço</option>';
-                    enderecos.forEach(end => {
-                        const opt = document.createElement('option');
-                        opt.value = end.id;
-                        opt.textContent = `${end.rua}, ${end.numero} - ${end.bairro}`;
-                        select.appendChild(opt);
-                    });
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        }
-
-        async function finalizarPedido() {
-            const token = localStorage.getItem('token');
-            const enderecoId = document.getElementById('endereco-select').value;
-            const total = document.getElementById('total-value').textContent;
-
-            if (!enderecoId) return alert('Por favor, selecione um endereço de entrega.');
-            if (carrinho.length === 0) return alert('Seu carrinho está vazio.');
-
-            // Prepara payload
-            const itens = carrinho.map(c => ({
-                produtoId: c.id, // Supondo que o produto salvo no storage tem ID
-                quantidade: c.quantidade,
-                precoUnit: c.preco
-            }));
-
-            try {
-                const res = await fetch('/pedidos', {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        itens,
-                        total,
-                        enderecoId
-                    })
-                });
-
-                if (res.ok) {
-                    alert('Pedido realizado com sucesso! A comida está a caminho 🛵');
-                    localStorage.removeItem('carrinho');
-                    window.location.href = '/';
-                } else {
-                    alert('Erro ao finalizar pedido.');
-                }
-            } catch (error) {
-                alert('Erro de conexão.');
-            }
-        }
-
+    function alterarQtd(index, delta) {
+        carrinho[index].quantidade += delta;
+        if (carrinho[index].quantidade <= 0) carrinho.splice(index, 1);
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
         renderCart();
-        carregarEnderecos();
-    </script>
+    }
+
+    // Carrega Endereços do Usuário
+    async function carregarEnderecos() {
+        const token = localStorage.getItem('token');
+        if (!token) return window.location.href = '/login';
+
+        try {
+            const res = await fetch('/enderecos', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const enderecos = await res.json();
+            const select = document.getElementById('endereco-select');
+            
+            if (enderecos.length === 0) {
+                select.innerHTML = '<option value="">Cadastre um endereço acima 👆</option>';
+            } else {
+                select.innerHTML = '<option value="" disabled selected>Selecione o local de entrega</option>';
+                enderecos.forEach(end => {
+                    const opt = document.createElement('option');
+                    opt.value = end.id;
+                    opt.textContent = `${end.rua}, ${end.numero} - ${end.bairro} (${end.cidade})`;
+                    select.appendChild(opt);
+                });
+            }
+        } catch (err) { console.error(err); }
+    }
+
+    // Finalizar Pedido
+    async function finalizarPedido() {
+        const token = localStorage.getItem('token');
+        const enderecoId = document.getElementById('endereco-select').value;
+        const total = document.getElementById('total-value').innerText;
+        
+        // Pega o radio button selecionado
+        const pagamentoEl = document.querySelector('input[name="pagamento"]:checked');
+        const metodoPagamento = pagamentoEl ? pagamentoEl.value : null;
+
+        if (carrinho.length === 0) return alert('Carrinho vazio!');
+        if (!enderecoId) return alert('Selecione um endereço!');
+        if (!metodoPagamento) return alert('Selecione uma forma de pagamento!');
+
+        const payload = {
+            itens: carrinho.map(i => ({ 
+                produtoId: i.id, // ID do produto precisa vir do index
+                quantidade: i.quantidade, 
+                precoUnit: i.preco 
+            })),
+            total: total,
+            enderecoId: enderecoId,
+            metodoPagamento: metodoPagamento
+        };
+
+        try {
+            const res = await fetch('/pedidos', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (res.ok) {
+                alert('Pedido realizado com sucesso! 🎉');
+                localStorage.removeItem('carrinho');
+                window.location.href = '/';
+            } else {
+                const data = await res.json();
+                alert(data.error || 'Erro ao processar pedido.');
+            }
+        } catch (err) { alert('Erro de conexão.'); }
+    }
+
+    renderCart();
+    carregarEnderecos();
+</script>
+
 </body>
 </html>

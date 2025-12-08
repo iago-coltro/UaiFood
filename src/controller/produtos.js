@@ -1,16 +1,14 @@
 const prisma = require('../../prisma/prismaClient');
 
 const criarProduto = async (req, res) => {
-    // Não recebemos mais 'restauranteId' do corpo da requisição
     const { nome, descricao, preco, foto } = req.body;
 
     try {
-        // Busca o primeiro restaurante cadastrado no banco para vincular o produto
         const restauranteUnico = await prisma.restaurante.findFirst();
 
         if (!restauranteUnico) {
             return res.status(400).json({ 
-                error: 'Nenhum restaurante principal encontrado no sistema. Cadastre um via Banco de Dados.' 
+                error: 'Nenhum restaurante principal encontrado no sistema.' 
             });
         }
 
@@ -20,7 +18,7 @@ const criarProduto = async (req, res) => {
                 descricao,
                 foto,
                 preco: parseFloat(preco),
-                restauranteId: restauranteUnico.id // Vincula automaticamente
+                restauranteId: restauranteUnico.id
             }
         });
         res.status(201).json(produto);
@@ -30,4 +28,15 @@ const criarProduto = async (req, res) => {
     }
 };
 
-module.exports = { criarProduto };
+// --- NOVA FUNÇÃO ---
+const listarProdutos = async (req, res) => {
+    try {
+        const produtos = await prisma.produto.findMany();
+        res.status(200).json(produtos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Erro ao buscar produtos.' });
+    }
+};
+
+module.exports = { criarProduto, listarProdutos };

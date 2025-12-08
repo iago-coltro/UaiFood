@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UAIfood - Novo Endereço</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -10,13 +11,14 @@
         .auth-card { background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 20px; width: 100%; max-width: 600px; }
         input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: white; }
         .row { display: flex; gap: 15px; }
-        button { width: 100%; padding: 12px; background: #FF6B35; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; }
+        button { width: 100%; padding: 12px; background: #FF6B35; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #E55A2B; }
         h2 { text-align: center; margin-bottom: 20px; color: #FF6B35; }
     </style>
 </head>
 <body>
     <div class="auth-card">
-        <h2>Cadastrar Endereço 📍</h2>
+        <h2>📍 Onde entregar?</h2>
         <form id="endereco-form">
             <input type="text" id="cep" placeholder="CEP (00000-000)" required>
             <div class="row">
@@ -28,11 +30,11 @@
                 <input type="text" id="cidade" placeholder="Cidade" required>
                 <input type="text" id="estado" placeholder="UF" required style="width: 80px;">
             </div>
-            <input type="text" id="complemento" placeholder="Complemento (Opcional)">
+            <input type="text" id="complemento" placeholder="Complemento (Casa, Apt, Bloco)">
             
-            <button type="submit">Salvar Endereço</button>
+            <button type="submit">Salvar e Voltar ao Carrinho</button>
         </form>
-        <div style="text-align:center; margin-top:15px;"><a href="/carrinho" style="color:#aaa; text-decoration:none;">Voltar para o Carrinho</a></div>
+        <div style="text-align:center; margin-top:15px;"><a href="/carrinho" style="color:#aaa; text-decoration:none;">Cancelar</a></div>
     </div>
 
     <script>
@@ -61,7 +63,6 @@
             });
 
             if (response.ok) {
-                alert('Endereço salvo!');
                 window.location.href = '/carrinho';
             } else {
                 alert('Erro ao salvar endereço.');

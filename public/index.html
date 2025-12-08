@@ -3,15 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="UAIfood - O melhor sabor da cidade entregue na sua casa!">
+  <meta name="description" content="UAIfood - Delivery de comida rápido e delicioso.">
   <title>UAIfood - Delivery Oficial</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* [SEU CSS ORIGINAL - MANTIDO] */
+    /* --- CSS GLOBAL E ESTRUTURAL --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root { --primary: #ff6b35; --primary-dark: #e55a2b; --secondary: #2d3436; --accent: #00b894; --background: #fafafa; --card: #ffffff; --text: #2d3436; --text-light: #636e72; --border: #dfe6e9; --gradient-hero: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff6b35 100%); --gradient-dark: linear-gradient(135deg, #2d3436 0%, #000000 100%); --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08); --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12); --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15); --shadow-glow: 0 8px 32px rgba(255, 107, 53, 0.3); }
+    :root { 
+        --primary: #ff6b35; --primary-dark: #e55a2b; --secondary: #2d3436; 
+        --accent: #00b894; --background: #fafafa; --card: #ffffff; 
+        --text: #2d3436; --text-light: #636e72; --border: #dfe6e9; 
+        --gradient-hero: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff6b35 100%);
+        --gradient-dark: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08); 
+        --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+        --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15);
+    }
     html { scroll-behavior: smooth; }
     body { font-family: 'Poppins', sans-serif; background: var(--background); color: var(--text); line-height: 1.6; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
@@ -25,42 +34,39 @@
     .logo { font-size: 28px; font-weight: 800; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a { font-weight: 500; color: var(--text-light); transition: color 0.3s ease; position: relative; }
-    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s ease; }
     .nav-links a:hover { color: var(--primary); }
-    .nav-links a:hover::after { width: 100%; }
     .nav-buttons { display: flex; align-items: center; gap: 12px; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 12px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; border: none; }
+    
+    /* Botões */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 12px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; border: none; }
     .btn-ghost { background: transparent; color: var(--text); }
     .btn-ghost:hover { background: var(--border); }
-    .btn-primary { background: var(--gradient-hero); color: white; box-shadow: var(--shadow-glow); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255, 107, 53, 0.4); }
+    .btn-primary { background: var(--gradient-hero); color: white; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4); }
     .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
     .btn-outline:hover { background: var(--primary); color: white; }
+    
+    /* Mobile Menu */
     .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
-    .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: var(--text); transition: all 0.3s ease; }
+    .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: var(--text); }
 
-    /* Hero */
+    /* Hero Section */
     .hero { padding: 140px 0 80px; background: linear-gradient(180deg, #fff5f0 0%, var(--background) 100%); position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%); border-radius: 50%; }
     .hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
     .hero-content { position: relative; z-index: 2; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255, 107, 53, 0.1); border-radius: 50px; font-size: 14px; font-weight: 500; color: var(--primary); margin-bottom: 24px; animation: fadeInUp 0.6s ease; }
-    .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; animation: fadeInUp 0.6s ease 0.1s both; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255, 107, 53, 0.1); border-radius: 50px; font-size: 14px; font-weight: 500; color: var(--primary); margin-bottom: 24px; }
+    .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
     .hero h1 span { background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero-description { font-size: 18px; color: var(--text-light); margin-bottom: 32px; max-width: 480px; animation: fadeInUp 0.6s ease 0.2s both; }
-    .hero-search { display: flex; gap: 12px; margin-bottom: 40px; animation: fadeInUp 0.6s ease 0.3s both; }
+    .hero-description { font-size: 18px; color: var(--text-light); margin-bottom: 32px; max-width: 480px; }
+    .hero-search { display: flex; gap: 12px; margin-bottom: 40px; }
     .search-input { flex: 1; position: relative; }
-    .search-input input { width: 100%; padding: 16px 16px 16px 48px; border: 2px solid var(--border); border-radius: 14px; font-size: 16px; font-family: inherit; transition: all 0.3s ease; background: var(--card); }
-    .search-input input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1); }
-    .search-input svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--text-light); }
-    .hero-stats { display: flex; gap: 40px; animation: fadeInUp 0.6s ease 0.4s both; }
-    .stat-item { text-align: left; }
+    .search-input input { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 14px; font-size: 16px; background: var(--card); }
+    .hero-stats { display: flex; gap: 40px; }
     .stat-value { font-size: 32px; font-weight: 800; color: var(--text); }
     .stat-label { font-size: 14px; color: var(--text-light); }
-    .hero-image { position: relative; animation: fadeInRight 0.8s ease 0.2s both; }
-    .hero-image img { width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); }
+    .hero-image img { width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); position: relative; z-index: 1; }
     
-    /* Floating Cards */
     .floating-card { position: absolute; background: var(--card); border-radius: 16px; padding: 16px 20px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 12px; animation: float 3s ease-in-out infinite; }
     .floating-card.card-1 { top: 20%; left: -40px; }
     .floating-card.card-2 { bottom: 20%; right: -40px; animation-delay: 1.5s; }
@@ -76,81 +82,49 @@
     .section-title { font-size: 42px; font-weight: 800; margin-bottom: 16px; }
     .section-subtitle { font-size: 18px; color: var(--text-light); max-width: 600px; margin: 0 auto; }
     
-    /* Grids */
     .categories-grid, .testimonials-grid, .featured-grid { display: grid; gap: 32px; }
     .categories-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
     .featured-grid, .testimonials-grid { grid-template-columns: repeat(3, 1fr); }
-    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 
-    /* Cards */
-    .category-card { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 1; cursor: pointer; transition: all 0.4s ease; }
+    .category-card { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 1; cursor: pointer; transition: transform 0.3s ease; }
     .category-card:hover { transform: scale(1.03); }
-    .category-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .category-card img { width: 100%; height: 100%; object-fit: cover; }
     .category-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.8) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; }
-    .category-name { font-size: 22px; font-weight: 700; color: white; margin-bottom: 4px; }
+    .category-name { font-size: 22px; font-weight: 700; color: white; }
+
+    /* Cardápio */
+    .featured { padding: 80px 0; background: var(--card); }
     
-    .restaurant-card { background: var(--background); border-radius: 20px; overflow: hidden; transition: all 0.3s ease; }
+    .restaurant-card { background: var(--background); border-radius: 20px; overflow: hidden; transition: transform 0.3s ease; border: 1px solid var(--border); display: flex; flex-direction: column; height: 100%; }
     .restaurant-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-    .restaurant-image { position: relative; height: 180px; overflow: hidden; }
+    
+    .restaurant-image { position: relative; height: 200px; overflow: hidden; }
     .restaurant-image img { width: 100%; height: 100%; object-fit: cover; }
     .restaurant-badge { position: absolute; top: 12px; left: 12px; padding: 6px 12px; background: var(--accent); color: white; border-radius: 8px; font-size: 12px; font-weight: 600; }
-    .restaurant-info { padding: 20px; }
+    
+    .restaurant-info { padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
     .restaurant-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-    .restaurant-meta { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--text-light); margin-bottom: 12px; }
-    .rating { color: #f1c40f; }
-    .tag { padding: 4px 10px; background: rgba(255, 107, 53, 0.1); color: var(--primary); border-radius: 6px; font-size: 12px; font-weight: 500; }
+    .restaurant-desc { font-size: 14px; color: var(--text-light); margin-bottom: 12px; flex: 1; }
+    
+    .restaurant-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid var(--border); padding-top: 10px; }
+    .price { font-size: 18px; font-weight: 800; color: var(--primary); }
+    .btn-add { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .btn-add:hover { background: var(--primary-dark); }
 
-    .testimonial-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; transition: all 0.3s ease; }
-    .testimonial-card:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-4px); }
-    .testimonial-stars { color: #f1c40f; margin-bottom: 16px; }
-    .testimonial-text { margin-bottom: 24px; color: rgba(255,255,255,0.9); }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--gradient-hero); display: flex; align-items: center; justify-content: center; font-weight: 700; }
-
-    /* Sections Padding & Colors */
-    .how-it-works, .featured { padding: 100px 0; background: var(--card); }
-    .categories, .cta { padding: 100px 0; background: var(--background); }
     .testimonials { padding: 100px 0; background: var(--gradient-dark); color: white; }
+    .testimonial-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; }
     
-    .step-card { text-align: center; padding: 40px 32px; border-radius: 24px; background: var(--background); transition: all 0.3s ease; position: relative; }
-    .step-icon { width: 80px; height: 80px; margin: 0 auto 24px; background: var(--gradient-hero); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 36px; box-shadow: var(--shadow-glow); }
-    
-    .cta-card { background: var(--gradient-hero); border-radius: 32px; padding: 80px; text-align: center; position: relative; overflow: hidden; }
-    .cta-title { font-size: 42px; font-weight: 800; color: white; margin-bottom: 16px; }
-    .cta-subtitle { font-size: 18px; color: rgba(255,255,255,0.9); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
-    .cta-buttons { display: flex; gap: 16px; justify-content: center; }
-    .btn-white { background: white; color: var(--primary); }
-    .btn-ghost-white { border: 2px solid white; color: white; }
-
-    /* Footer */
+    .cta { padding: 100px 0; background: var(--background); }
+    .cta-card { background: var(--gradient-hero); border-radius: 32px; padding: 80px; text-align: center; color: white; }
     .footer { padding: 80px 0 32px; background: var(--secondary); color: white; }
     .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 48px; margin-bottom: 48px; }
-    .social-links { display: flex; gap: 12px; margin-top: 16px; }
-    .social-link { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
-    .footer-column h4 { font-weight: 700; margin-bottom: 20px; }
-    .footer-column ul { display: flex; flex-direction: column; gap: 12px; }
-    .footer-column a { color: rgba(255,255,255,0.7); }
     .footer-bottom { padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 14px; color: rgba(255,255,255,0.6); }
 
-    /* Animations */
+    /* Animation & Responsive */
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .hero .container { grid-template-columns: 1fr; text-align: center; }
-      .hero-image { margin-top: 40px; }
-      .categories-grid { grid-template-columns: repeat(2, 1fr); }
-      .featured-grid, .testimonials-grid, .steps-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .mobile-menu-btn { display: flex; }
-      .hero-stats { justify-content: center; }
-      .featured-grid, .testimonials-grid, .steps-grid, .footer-grid { grid-template-columns: 1fr; }
-      .cta-buttons { flex-direction: column; }
-    }
+    @media (max-width: 1024px) { .hero .container { grid-template-columns: 1fr; text-align: center; } .featured-grid, .categories-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .nav-links { display: none; } .mobile-menu-btn { display: flex; } .featured-grid, .categories-grid, .footer-grid { grid-template-columns: 1fr; } .hero-stats { justify-content: center; } }
   </style>
 </head>
 <body>
@@ -158,85 +132,61 @@
   <nav class="navbar">
     <div class="container">
       <a href="#" class="logo">UAIfood</a>
-      
       <ul class="nav-links">
         <li><a href="#home">Início</a></li>
         <li><a href="#menu">Cardápio</a></li>
-        <li><a href="#about">Sobre</a></li>
         <li><a href="#testimonials">Avaliações</a></li>
+        <li><a href="/carrinho" id="nav-cart">Carrinho 🛒</a></li>
       </ul>
-      
       <div class="nav-buttons">
         <a href="/login" class="btn btn-ghost">Entrar</a>
         <a href="/cadastro" class="btn btn-primary">Cadastrar</a>
       </div>
-      
-      <button class="mobile-menu-btn">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="mobile-menu-btn"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-badge">
-          🔥 O sabor preferido da cidade
-        </div>
-        <h1>
-          Sua comida favorita<br>
-          <span>entregue quentinha</span>
-        </h1>
-        <p class="hero-description">
-          Ingredientes frescos, receitas exclusivas e entrega super rápida. Peça agora e surpreenda seu paladar.
-        </p>
+        <div class="hero-badge">🔥 O melhor delivery da cidade</div>
+        <h1>Sua comida favorita<br><span>entregue quentinha</span></h1>
+        <p class="hero-description">Ingredientes frescos, receitas exclusivas e entrega super rápida. Peça agora e surpreenda seu paladar.</p>
         <div class="hero-search">
-          <div class="search-input">
-            <input type="text" placeholder="Qual a sua fome de hoje?">
-          </div>
-          <button class="btn btn-primary">Ver Cardápio</button>
+          <div class="search-input"><input type="text" placeholder="Qual a sua fome de hoje?"></div>
+          <button class="btn btn-primary" onclick="window.location.href='#menu'">Ver Cardápio</button>
         </div>
         <div class="hero-stats">
           <div class="stat-item"><div class="stat-value">30min</div><div class="stat-label">Entrega Média</div></div>
-          <div class="stat-item"><div class="stat-value">+10k</div><div class="stat-label">Clientes Felizes</div></div>
           <div class="stat-item"><div class="stat-value">4.9★</div><div class="stat-label">Avaliação</div></div>
         </div>
       </div>
       <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=500&fit=crop" alt="Comida deliciosa">
-        <div class="floating-card card-1">
-          <div class="floating-icon orange">🍕</div>
-          <div class="floating-text"><strong>Forno a Lenha</strong><span>Sabor autêntico</span></div>
-        </div>
-        <div class="floating-card card-2">
-          <div class="floating-icon green">✓</div>
-          <div class="floating-text"><strong>Ingredientes Frescos</strong><span>Selecionados hoje</span></div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=500&fit=crop" alt="Comida">
       </div>
     </div>
   </section>
 
-  <section class="categories" id="menu">
+  <section class="categories">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Nosso Cardápio</span>
-        <h2 class="section-title">Explore nossas delícias</h2>
-        <p class="section-subtitle">De lanches rápidos a pratos completos, temos tudo para matar sua fome.</p>
+        <span class="section-tag">Categorias</span>
+        <h2 class="section-title">Navegue por sabores</h2>
       </div>
       <div class="categories-grid">
-        <div class="category-card">
+        <div class="category-card" onclick="window.location.href='#menu'">
           <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=400&fit=crop" alt="Pizza">
           <div class="category-overlay"><h3 class="category-name">Pizzas</h3></div>
         </div>
-        <div class="category-card">
-          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=400&fit=crop" alt="Hambúrguer">
+        <div class="category-card" onclick="window.location.href='#menu'">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=400&fit=crop" alt="Burger">
           <div class="category-overlay"><h3 class="category-name">Burgers</h3></div>
         </div>
-        <div class="category-card">
+        <div class="category-card" onclick="window.location.href='#menu'">
           <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&h=400&fit=crop" alt="Sushi">
           <div class="category-overlay"><h3 class="category-name">Japonesa</h3></div>
         </div>
-        <div class="category-card">
+        <div class="category-card" onclick="window.location.href='#menu'">
           <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=400&fit=crop" alt="Brasileira">
           <div class="category-overlay"><h3 class="category-name">Brasileira</h3></div>
         </div>
@@ -244,61 +194,16 @@
     </div>
   </section>
 
-  <section class="featured">
+  <section class="featured" id="menu">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Favoritos</span>
-        <h2 class="section-title">Destaques do Cardápio</h2>
-        <p class="section-subtitle">Os pratos mais pedidos da semana pelos nossos clientes.</p>
+        <span class="section-tag">Cardápio</span>
+        <h2 class="section-title">Destaques da Casa</h2>
+        <p class="section-subtitle">Confira nossos pratos cadastrados recentemente.</p>
       </div>
-      <div class="featured-grid">
-        <div class="restaurant-card">
-          <div class="restaurant-image">
-            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=250&fit=crop" alt="Pizza">
-            <span class="restaurant-badge">Promoção</span>
-          </div>
-          <div class="restaurant-info">
-            <h3 class="restaurant-name">Pizza Moda da Casa</h3>
-            <div class="restaurant-meta">
-              <span class="rating">★ 4.9</span>
-              <span>Serve 3 pessoas</span>
-            </div>
-            <div class="restaurant-tags">
-              <span class="tag">Bacon</span> <span class="tag">Catupiry</span>
-            </div>
-          </div>
-        </div>
-        <div class="restaurant-card">
-          <div class="restaurant-image">
-            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=250&fit=crop" alt="Burger">
-            <span class="restaurant-badge">Novo</span>
-          </div>
-          <div class="restaurant-info">
-            <h3 class="restaurant-name">X-Monstro Duplo</h3>
-            <div class="restaurant-meta">
-              <span class="rating">★ 5.0</span>
-              <span>Individual</span>
-            </div>
-            <div class="restaurant-tags">
-              <span class="tag">Artesanal</span> <span class="tag">Cheddar</span>
-            </div>
-          </div>
-        </div>
-        <div class="restaurant-card">
-          <div class="restaurant-image">
-            <img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=400&h=250&fit=crop" alt="Sushi">
-          </div>
-          <div class="restaurant-info">
-            <h3 class="restaurant-name">Combo Sushi Family</h3>
-            <div class="restaurant-meta">
-              <span class="rating">★ 4.8</span>
-              <span>40 peças</span>
-            </div>
-            <div class="restaurant-tags">
-              <span class="tag">Salmão</span> <span class="tag">Fresco</span>
-            </div>
-          </div>
-        </div>
+      
+      <div class="featured-grid" id="cardapio-grid">
+        <p style="text-align: center; grid-column: 1/-1; color: #888;">Carregando cardápio...</p>
       </div>
     </div>
   </section>
@@ -306,12 +211,10 @@
   <section class="cta">
     <div class="container">
       <div class="cta-card">
-        <div class="cta-content">
-          <h2 class="cta-title">Fome de quê?</h2>
-          <p class="cta-subtitle">Faça seu pedido agora e ganhe 10% de desconto na primeira compra!</p>
-          <div class="cta-buttons">
-            <button class="btn btn-white">Fazer Pedido</button>
-          </div>
+        <h2 class="cta-title">Fome de quê?</h2>
+        <p class="cta-subtitle">Faça seu pedido agora e receba no conforto da sua casa!</p>
+        <div class="cta-buttons">
+          <button class="btn btn-white" onclick="window.location.href='#menu'">Fazer Pedido</button>
         </div>
       </div>
     </div>
@@ -322,34 +225,19 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo">UAIfood</div>
-          <p>O sabor que você ama, entregue com o carinho que você merece.</p>
-          <div class="social-links">
-            <a href="#" class="social-link">📘</a>
-            <a href="#" class="social-link">📸</a>
-            <a href="#" class="social-link">🐦</a>
-          </div>
+          <p>O melhor sabor de Minas, direto para sua mesa.</p>
         </div>
         <div class="footer-column">
           <h4>Institucional</h4>
-          <ul>
-            <li><a href="#">Sobre Nós</a></li>
-            <li><a href="#">Localização</a></li>
-            <li><a href="#">Contato</a></li>
-          </ul>
+          <ul><li><a href="#">Sobre Nós</a></li><li><a href="#">Contato</a></li></ul>
         </div>
         <div class="footer-column">
           <h4>Ajuda</h4>
-          <ul>
-            <li><a href="#">Meus Pedidos</a></li>
-            <li><a href="#">Política de Entrega</a></li>
-            <li><a href="#">Fale Conosco</a></li>
-          </ul>
+          <ul><li><a href="#">Meus Pedidos</a></li><li><a href="#">Política de Entrega</a></li></ul>
         </div>
         <div class="footer-column">
-          <h4>Desenvolvedores</h4>
-          <ul>
-            <li><a href="/api-docs">Documentação (API)</a></li>
-          </ul>
+          <h4>Admin</h4>
+          <ul><li><a href="/login">Área Restrita</a></li><li><a href="/api-docs">API Docs</a></li></ul>
         </div>
       </div>
       <div class="footer-bottom">
@@ -359,7 +247,87 @@
   </footer>
 
   <script>
+    // --- LÓGICA DO CARRINHO ---
+    function adicionarAoCarrinho(id, nome, preco) {
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        
+        const itemExistente = carrinho.find(item => item.id === id);
+        
+        if (itemExistente) {
+            itemExistente.quantidade += 1;
+        } else {
+            carrinho.push({ id, nome, preco, quantidade: 1 });
+        }
+        
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        atualizarContadorCarrinho();
+        
+        if(confirm(`${nome} adicionado! Deseja ir para o carrinho?`)) {
+            window.location.href = '/carrinho';
+        }
+    }
+
+    function atualizarContadorCarrinho() {
+        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+        const navCart = document.getElementById('nav-cart');
+        
+        if (totalItens > 0) {
+            navCart.innerText = `Carrinho (${totalItens}) 🛒`;
+            navCart.style.color = 'var(--primary)';
+            navCart.style.fontWeight = 'bold';
+        } else {
+            navCart.innerText = `Carrinho 🛒`;
+            navCart.style.color = 'var(--text-light)';
+        }
+    }
+
+    // --- CARREGAR CARDÁPIO (CORRIGIDO PARA /api/produtos) ---
+    async function carregarCardapio() {
+        try {
+            // Rota corrigida para a API
+            const response = await fetch('/api/produtos'); 
+            const produtos = await response.json();
+            const grid = document.getElementById('cardapio-grid');
+            
+            if (produtos.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Nenhum item cadastrado no momento.</p>';
+                return;
+            }
+
+            grid.innerHTML = '';
+
+            produtos.forEach(produto => {
+                const card = document.createElement('div');
+                card.className = 'restaurant-card';
+                card.innerHTML = `
+                    <div class="restaurant-image">
+                        <img src="${produto.foto}" alt="${produto.nome}" onerror="this.src='https://via.placeholder.com/400x250?text=Sem+Foto'">
+                        <span class="restaurant-badge">Novo</span>
+                    </div>
+                    <div class="restaurant-info">
+                        <h3 class="restaurant-name">${produto.nome}</h3>
+                        <p class="restaurant-desc">${produto.descricao || 'Sem descrição.'}</p>
+                        <div class="restaurant-footer">
+                            <span class="price">R$ ${parseFloat(produto.preco).toFixed(2).replace('.', ',')}</span>
+                            <button class="btn-add" onclick="adicionarAoCarrinho(${produto.id}, '${produto.nome}', ${produto.preco})">+ Adicionar</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+        } catch (error) {
+            console.error('Erro ao carregar cardápio:', error);
+            document.getElementById('cardapio-grid').innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: red;">Erro ao carregar itens.</p>';
+        }
+    }
+
+    // --- LÓGICA DE USUÁRIO / ADMIN ---
     document.addEventListener('DOMContentLoaded', () => {
+        atualizarContadorCarrinho();
+        carregarCardapio(); // Carrega os produtos ao iniciar
+
         const token = localStorage.getItem('token');
         const nome = localStorage.getItem('usuarioNome');
         const navButtons = document.querySelector('.nav-buttons');
@@ -368,11 +336,10 @@
         if (token && nome) {
             const primeiroNome = nome.split(' ')[0];
 
-            // MENU ADMIN (MODO RESTAURANTE ÚNICO)
             if (nome.toLowerCase() === 'admin') {
-                const liCadastros = document.createElement('li');
-                liCadastros.style.position = 'relative';
-                liCadastros.innerHTML = `
+                const liAdmin = document.createElement('li');
+                liAdmin.style.position = 'relative';
+                liAdmin.innerHTML = `
                     <a href="#" style="color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px;">
                         Admin <span>▾</span>
                     </a>
@@ -382,19 +349,13 @@
                         flex-direction: column; gap: 10px; min-width: 180px; list-style: none;
                         z-index: 1000; border: 1px solid var(--border);
                     ">
-                        <li>
-                            <a href="/produtos" style="color: var(--text); font-size: 14px; display: block; padding: 5px;">
-                                🍔 Gerenciar Cardápio
-                            </a>
-                        </li>
+                        <li><a href="/produtos" style="color: var(--text); font-size: 14px; display: block; padding: 5px;">🍔 Gerenciar Cardápio</a></li>
                     </ul>
                 `;
-
-                const dropdown = liCadastros.querySelector('.dropdown-menu');
-                liCadastros.addEventListener('mouseenter', () => { dropdown.style.display = 'flex'; });
-                liCadastros.addEventListener('mouseleave', () => { dropdown.style.display = 'none'; });
-
-                navLinks.insertBefore(liCadastros, navLinks.firstChild);
+                const dropdown = liAdmin.querySelector('.dropdown-menu');
+                liAdmin.addEventListener('mouseenter', () => dropdown.style.display = 'flex');
+                liAdmin.addEventListener('mouseleave', () => dropdown.style.display = 'none');
+                navLinks.insertBefore(liAdmin, navLinks.firstChild);
             }
 
             navButtons.innerHTML = `
@@ -402,9 +363,7 @@
                     <span style="font-weight: 600; color: var(--text);">
                         Olá, <span style="color: var(--primary);">${primeiroNome}!</span>
                     </span>
-                    <button onclick="fazerLogout()" class="btn btn-outline" style="padding: 8px 16px; font-size: 13px;">
-                        Sair
-                    </button>
+                    <button onclick="fazerLogout()" class="btn btn-outline" style="padding: 8px 16px; font-size: 13px;">Sair</button>
                 </div>
             `;
         }

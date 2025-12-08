@@ -6,7 +6,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  // A URL foi movida para o prisma.config.ts no Prisma 7
 }
 
 model Usuario {
@@ -36,7 +35,7 @@ model Endereco {
   usuarioId   Int
   usuario     Usuario  @relation(fields: [usuarioId], references: [id])
 
-  // Relacionamento inverso (Um endereço pode ter vários pedidos entregues nele)
+  // Relacionamento inverso para os pedidos entregues neste endereço
   pedidos     Pedido[]
 }
 
@@ -59,7 +58,7 @@ model Restaurante {
 
 model Categoria {
   id           Int           @id @default(autoincrement())
-  nome         String        @unique // Ex: "Lanches", "Mineira", "Japonesa"
+  nome         String        @unique 
   restaurantes Restaurante[]
 }
 
@@ -77,28 +76,28 @@ model Produto {
 }
 
 model Pedido {
-  id            Int         @id @default(autoincrement())
-  data          DateTime    @default(now())
-  status        String      @default("PENDENTE") // PENDENTE, PREPARANDO, SAIU_ENTREGA, ENTREGUE
-  total         Decimal
+  id              Int         @id @default(autoincrement())
+  data            DateTime    @default(now())
+  status          String      @default("PENDENTE") // PENDENTE, PREPARANDO, SAIU_ENTREGA, ENTREGUE
+  total           Decimal
+  metodoPagamento String      // PIX, CARTAO, DINHEIRO
   
-  usuarioId     Int
-  usuario       Usuario     @relation(fields: [usuarioId], references: [id])
+  usuarioId       Int
+  usuario         Usuario     @relation(fields: [usuarioId], references: [id])
   
-  restauranteId Int
-  restaurante   Restaurante @relation(fields: [restauranteId], references: [id])
+  restauranteId   Int
+  restaurante     Restaurante @relation(fields: [restauranteId], references: [id])
 
-  // CAMPO NOVO: Endereço de entrega selecionado
-  enderecoId    Int?
-  endereco      Endereco?   @relation(fields: [enderecoId], references: [id])
+  enderecoId      Int?
+  endereco        Endereco?   @relation(fields: [enderecoId], references: [id])
   
-  itens         ItemPedido[]
+  itens           ItemPedido[]
 }
 
 model ItemPedido {
   id         Int      @id @default(autoincrement())
   quantidade Int
-  precoUnit  Decimal  // Preço no momento da compra (para histórico)
+  precoUnit  Decimal  // Preço congelado no momento da compra
   
   pedidoId   Int
   pedido     Pedido   @relation(fields: [pedidoId], references: [id])

@@ -8,16 +8,15 @@ const getUserId = (req) => {
 };
 
 const criarPedido = async (req, res) => {
-    const { itens, total, enderecoId } = req.body; // itens = [{ produtoId, quantidade, precoUnit }]
+    // Adicionamos 'metodoPagamento' na desestruturação
+    const { itens, total, enderecoId, metodoPagamento } = req.body;
 
     try {
         const usuarioId = getUserId(req);
         
-        // Pega o restaurante principal (regra de negócio atual)
         const restaurante = await prisma.restaurante.findFirst();
         if (!restaurante) return res.status(400).json({ error: 'Restaurante não encontrado.' });
 
-        // Cria o pedido e os itens em uma transação
         const pedido = await prisma.pedido.create({
             data: {
                 usuarioId,
@@ -25,6 +24,7 @@ const criarPedido = async (req, res) => {
                 enderecoId: parseInt(enderecoId),
                 total: parseFloat(total),
                 status: 'PENDENTE',
+                metodoPagamento: metodoPagamento, // Salva o método escolhido
                 itens: {
                     create: itens.map(item => ({
                         produtoId: item.produtoId,
@@ -33,7 +33,7 @@ const criarPedido = async (req, res) => {
                     }))
                 }
             },
-            include: { itens: true } // Retorna os itens na resposta
+            include: { itens: true }
         });
 
         res.status(201).json(pedido);
