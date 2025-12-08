@@ -1,46 +1,58 @@
-require('dotenv').config();
+require('dotenv').config(); // Carrega as variáveis do .env
 const express = require('express');
 const path = require('path');
-const app = express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocs = require('./src/configs/swaggerConfig'); 
+
+// Importação das Rotas da API
 const usuarioRoutes = require('./src/routes/usuarios');
-const PORT = 3000;
+const restauranteRoutes = require('./src/routes/restaurantes'); // Nova rota que criamos
 
-app.use(express.json());
+const app = express();
 
-//Configura a pasta 'public' para servir arquivos estáticos (CSS, Imagens, HTML)
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Rota para a documentação do Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// Configurações do Express
+app.use(express.json()); // Permite ler JSON no corpo das requisições
+app.use(express.static(path.join(__dirname, 'public'))); // Serve os arquivos HTML/CSS/JS
 
 // Middleware de Log
 app.use((req, res, next) => {
-  console.log("Header Content-Type:", req.headers['content-type']);
-  console.log("Body recebido:", req.body);
+  console.log(`[${new Date().toLocaleTimeString()}] ${req.method} ${req.url}`);
   next();
 });
 
-// Usa as rotas de API
-app.use(usuarioRoutes);
+// --- DOCUMENTAÇÃO ---
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-//Rota Raiz explícita (opcional, pois o express.static já busca o index.html, mas é bom garantir)
+// --- ROTAS DA API ---
+app.use(usuarioRoutes);
+app.use(restauranteRoutes);
+
+// --- ROTAS DE PÁGINAS (FRONTEND) ---
+
+// 1. Página Inicial
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Rota para a Página de Login
+// 2. Página de Login
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// Rota para a Página de Cadastro
+// 3. Página de Cadastro de Usuário
 app.get('/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'cadastro.html'));
 });
 
+// 4. Página de Cadastro de Parceiro (Restaurante)
+app.get('/parceiro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'parceiro.html'));
+});
+
+// Inicialização do Servidor
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
   console.log(`Acesse: http://localhost:${PORT}`);
+  console.log(`Documentação: http://localhost:${PORT}/api-docs`);
 });
