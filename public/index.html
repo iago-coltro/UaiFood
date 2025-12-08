@@ -1397,5 +1397,37 @@
     </div>
   </footer>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        const nome = localStorage.getItem('usuarioNome');
+        const navButtons = document.querySelector('.nav-buttons');
+
+        // Se tiver token e nome salvos, o usuário está logado
+        if (token && nome) {
+            // Pega o primeiro nome para não ficar muito longo
+            const primeiroNome = nome.split(' ')[0];
+
+            navButtons.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-weight: 600; color: var(--text);">
+                        Olá, <span style="color: var(--primary);">${primeiroNome}!</span>
+                    </span>
+                    <button onclick="fazerLogout()" class="btn btn-outline" style="padding: 8px 16px; font-size: 13px;">
+                        Sair
+                    </button>
+                </div>
+            `;
+        }
+    });
+
+    function fazerLogout() {
+        // Limpa os dados e recarrega a página
+        localStorage.removeItem('token');
+        localStorage.removeItem('usuarioNome');
+        window.location.reload();
+    }
+</script>
+
 </body>
 </html>

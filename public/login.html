@@ -125,6 +125,9 @@
                 const data = await response.json();
                 if (response.ok) {
                     localStorage.setItem('token', data.token);
+                    
+                    //Adicionando o nome do usuário ao localStorage
+                    localStorage.setItem('usuarioNome', data.nome)
                     window.location.href = '/';
                 } else {
                     alert(data.error || 'Erro ao entrar.');

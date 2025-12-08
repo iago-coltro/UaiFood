@@ -44,7 +44,12 @@ const login = async (req, res) => {
         }
 
         const token = generateToken(usuario.id);
-        res.status(200).json({ token });
+        
+        // Retorna o token e o nome para usarmos no front-end
+        res.status(200).json({ 
+            token,
+            nome: usuario.nome 
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Erro ao realizar login' });
