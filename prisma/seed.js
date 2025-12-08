@@ -1,21 +1,29 @@
 const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const { Pool } = require('pg');
+const { PrismaPg } = require('@prisma/adapter-pg');
+
+// Garante a leitura da URL do banco
+const connectionString = process.env.DATABASE_URL;
+
+// Configura a conexão usando o driver 'pg'
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+
+// Inicia o Prisma Client com o adaptador correto
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log('🌱 Iniciando o seed do banco de dados...');
 
-  // 1. Criar uma Categoria Padrão (obrigatório para criar restaurante)
+  // 1. Criar Categoria Padrão
   const categoria = await prisma.categoria.upsert({
     where: { nome: 'Geral' },
     update: {},
-    create: {
-      nome: 'Geral',
-    },
+    create: { nome: 'Geral' },
   });
   console.log(`✅ Categoria criada: ${categoria.nome}`);
 
-  // 2. Criar o Restaurante Principal
-  // O 'upsert' garante que ele só cria se não existir um com ID 1
+  // 2. Criar Restaurante Principal
   const restaurante = await prisma.restaurante.upsert({
     where: { id: 1 },
     update: {},
