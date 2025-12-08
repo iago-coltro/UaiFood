@@ -3,1039 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="UAIfood - Delivery de comida rápido e delicioso. Peça agora e receba em casa!">
-  <title>UAIfood - Delivery de Comida</title>
+  <meta name="description" content="UAIfood - O melhor sabor da cidade entregue na sua casa!">
+  <title>UAIfood - Delivery Oficial</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --primary: #ff6b35;
-      --primary-dark: #e55a2b;
-      --secondary: #2d3436;
-      --accent: #00b894;
-      --background: #fafafa;
-      --card: #ffffff;
-      --text: #2d3436;
-      --text-light: #636e72;
-      --border: #dfe6e9;
-      --gradient-hero: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff6b35 100%);
-      --gradient-dark: linear-gradient(135deg, #2d3436 0%, #000000 100%);
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
-      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15);
-      --shadow-glow: 0 8px 32px rgba(255, 107, 53, 0.3);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--background);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    ul {
-      list-style: none;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ===== NAVBAR ===== */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      transition: all 0.3s ease;
-    }
-
-    .navbar .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 800;
-      background: var(--gradient-hero);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .nav-links a {
-      font-weight: 500;
-      color: var(--text-light);
-      transition: color 0.3s ease;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--primary);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-buttons {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 24px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-    }
-
-    .btn-ghost:hover {
-      background: var(--border);
-    }
-
-    .btn-primary {
-      background: var(--gradient-hero);
-      color: white;
-      box-shadow: var(--shadow-glow);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(255, 107, 53, 0.4);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-    }
-
-    .btn-outline:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-    }
-
-    .mobile-menu-btn span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      transition: all 0.3s ease;
-    }
-
-    /* ===== HERO ===== */
-    .hero {
-      padding: 140px 0 80px;
-      background: linear-gradient(180deg, #fff5f0 0%, var(--background) 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    .hero .container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: rgba(255, 107, 53, 0.1);
-      border-radius: 50px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--primary);
-      margin-bottom: 24px;
-      animation: fadeInUp 0.6s ease;
-    }
-
-    .hero h1 {
-      font-size: 56px;
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 24px;
-      animation: fadeInUp 0.6s ease 0.1s both;
-    }
-
-    .hero h1 span {
-      background: var(--gradient-hero);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-description {
-      font-size: 18px;
-      color: var(--text-light);
-      margin-bottom: 32px;
-      max-width: 480px;
-      animation: fadeInUp 0.6s ease 0.2s both;
-    }
-
-    .hero-search {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 40px;
-      animation: fadeInUp 0.6s ease 0.3s both;
-    }
-
-    .search-input {
-      flex: 1;
-      position: relative;
-    }
-
-    .search-input input {
-      width: 100%;
-      padding: 16px 16px 16px 48px;
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      font-size: 16px;
-      font-family: inherit;
-      transition: all 0.3s ease;
-      background: var(--card);
-    }
-
-    .search-input input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
-    }
-
-    .search-input svg {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-      color: var(--text-light);
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-      animation: fadeInUp 0.6s ease 0.4s both;
-    }
-
-    .stat-item {
-      text-align: left;
-    }
-
-    .stat-value {
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .stat-label {
-      font-size: 14px;
-      color: var(--text-light);
-    }
-
-    .hero-image {
-      position: relative;
-      animation: fadeInRight 0.8s ease 0.2s both;
-    }
-
-    .hero-image img {
-      width: 100%;
-      border-radius: 24px;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .floating-card {
-      position: absolute;
-      background: var(--card);
-      border-radius: 16px;
-      padding: 16px 20px;
-      box-shadow: var(--shadow-md);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .floating-card.card-1 {
-      top: 20%;
-      left: -40px;
-    }
-
-    .floating-card.card-2 {
-      bottom: 20%;
-      right: -40px;
-      animation-delay: 1.5s;
-    }
-
-    .floating-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-    }
-
-    .floating-icon.orange {
-      background: rgba(255, 107, 53, 0.1);
-    }
-
-    .floating-icon.green {
-      background: rgba(0, 184, 148, 0.1);
-    }
-
-    .floating-text strong {
-      display: block;
-      font-size: 14px;
-      color: var(--text);
-    }
-
-    .floating-text span {
-      font-size: 12px;
-      color: var(--text-light);
-    }
-
-    /* ===== HOW IT WORKS ===== */
-    .how-it-works {
-      padding: 100px 0;
-      background: var(--card);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-tag {
-      display: inline-block;
-      padding: 8px 16px;
-      background: rgba(255, 107, 53, 0.1);
-      border-radius: 50px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-size: 42px;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .section-subtitle {
-      font-size: 18px;
-      color: var(--text-light);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-    }
-
-    .step-card {
-      text-align: center;
-      padding: 40px 32px;
-      border-radius: 24px;
-      background: var(--background);
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .step-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .step-number {
-      position: absolute;
-      top: 20px;
-      right: 24px;
-      font-size: 64px;
-      font-weight: 800;
-      color: rgba(255, 107, 53, 0.1);
-      line-height: 1;
-    }
-
-    .step-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 24px;
-      background: var(--gradient-hero);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      box-shadow: var(--shadow-glow);
-    }
-
-    .step-title {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .step-description {
-      font-size: 15px;
-      color: var(--text-light);
-      line-height: 1.7;
-    }
-
-    /* ===== CATEGORIES ===== */
-    .categories {
-      padding: 100px 0;
-      background: var(--background);
-    }
-
-    .categories-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .category-card {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      aspect-ratio: 1;
-      cursor: pointer;
-      transition: all 0.4s ease;
-    }
-
-    .category-card:hover {
-      transform: scale(1.03);
-    }
-
-    .category-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .category-card:hover img {
-      transform: scale(1.1);
-    }
-
-    .category-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 24px;
-    }
-
-    .category-name {
-      font-size: 22px;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 4px;
-    }
-
-    .category-count {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    /* ===== FEATURED ===== */
-    .featured {
-      padding: 100px 0;
-      background: var(--card);
-    }
-
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .restaurant-card {
-      background: var(--background);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .restaurant-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .restaurant-image {
-      position: relative;
-      height: 180px;
-      overflow: hidden;
-    }
-
-    .restaurant-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .restaurant-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      padding: 6px 12px;
-      background: var(--accent);
-      color: white;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .restaurant-favorite {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 36px;
-      height: 36px;
-      background: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .restaurant-favorite:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    .restaurant-info {
-      padding: 20px;
-    }
-
-    .restaurant-name {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .restaurant-meta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 14px;
-      color: var(--text-light);
-      margin-bottom: 12px;
-    }
-
-    .restaurant-meta span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .rating {
-      color: #f1c40f;
-    }
-
-    .restaurant-tags {
-      display: flex;
-      gap: 8px;
-    }
-
-    .tag {
-      padding: 4px 10px;
-      background: rgba(255, 107, 53, 0.1);
-      color: var(--primary);
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    /* ===== TESTIMONIALS ===== */
-    .testimonials {
-      padding: 100px 0;
-      background: var(--gradient-dark);
-      color: white;
-    }
-
-    .testimonials .section-tag {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-    }
-
-    .testimonials .section-title {
-      color: white;
-    }
-
-    .testimonials .section-subtitle {
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .testimonial-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 32px;
-      transition: all 0.3s ease;
-    }
-
-    .testimonial-card:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-4px);
-    }
-
-    .testimonial-stars {
-      display: flex;
-      gap: 4px;
-      margin-bottom: 16px;
-      color: #f1c40f;
-      font-size: 18px;
-    }
-
-    .testimonial-text {
-      font-size: 16px;
-      line-height: 1.8;
-      margin-bottom: 24px;
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .author-avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--gradient-hero);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 18px;
-    }
-
-    .author-name {
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .author-location {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    /* ===== CTA ===== */
-    .cta {
-      padding: 100px 0;
-      background: var(--background);
-    }
-
-    .cta-card {
-      background: var(--gradient-hero);
-      border-radius: 32px;
-      padding: 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 400px;
-      height: 400px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-    }
-
-    .cta-card::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -10%;
-      width: 300px;
-      height: 300px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 50%;
-    }
-
-    .cta-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .cta-title {
-      font-size: 42px;
-      font-weight: 800;
-      color: white;
-      margin-bottom: 16px;
-    }
-
-    .cta-subtitle {
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 32px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-    }
-
-    .btn-white {
-      background: white;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .btn-white:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn-ghost-white {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-    }
-
-    .btn-ghost-white:hover {
-      background: white;
-      color: var(--primary);
-    }
-
-    /* ===== FOOTER ===== */
-    .footer {
-      padding: 80px 0 32px;
-      background: var(--secondary);
-      color: white;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr repeat(3, 1fr);
-      gap: 48px;
-      margin-bottom: 48px;
-    }
-
-    .footer-brand .logo {
-      margin-bottom: 16px;
-    }
-
-    .footer-brand p {
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 24px;
-      max-width: 300px;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 12px;
-    }
-
-    .social-link {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .social-link:hover {
-      background: var(--primary);
-      transform: translateY(-3px);
-    }
-
-    .footer-column h4 {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .footer-column ul {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .footer-column a {
-      color: rgba(255, 255, 255, 0.7);
-      transition: color 0.3s ease;
-    }
-
-    .footer-column a:hover {
-      color: var(--primary);
-    }
-
-    .footer-bottom {
-      padding-top: 32px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 14px;
-    }
-
-    .footer-bottom-links {
-      display: flex;
-      gap: 24px;
-    }
-
-    .footer-bottom-links a:hover {
-      color: white;
-    }
-
-    /* ===== ANIMATIONS ===== */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    /* ===== RESPONSIVE ===== */
+    /* [SEU CSS ORIGINAL - MANTIDO] */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --primary: #ff6b35; --primary-dark: #e55a2b; --secondary: #2d3436; --accent: #00b894; --background: #fafafa; --card: #ffffff; --text: #2d3436; --text-light: #636e72; --border: #dfe6e9; --gradient-hero: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff6b35 100%); --gradient-dark: linear-gradient(135deg, #2d3436 0%, #000000 100%); --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08); --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12); --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15); --shadow-glow: 0 8px 32px rgba(255, 107, 53, 0.3); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; background: var(--background); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; height: auto; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    
+    /* Navbar */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); transition: all 0.3s ease; }
+    .navbar .container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { font-size: 28px; font-weight: 800; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-weight: 500; color: var(--text-light); transition: color 0.3s ease; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s ease; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-buttons { display: flex; align-items: center; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 12px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; border: none; }
+    .btn-ghost { background: transparent; color: var(--text); }
+    .btn-ghost:hover { background: var(--border); }
+    .btn-primary { background: var(--gradient-hero); color: white; box-shadow: var(--shadow-glow); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255, 107, 53, 0.4); }
+    .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: white; }
+    .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+    .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: var(--text); transition: all 0.3s ease; }
+
+    /* Hero */
+    .hero { padding: 140px 0 80px; background: linear-gradient(180deg, #fff5f0 0%, var(--background) 100%); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%); border-radius: 50%; }
+    .hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255, 107, 53, 0.1); border-radius: 50px; font-size: 14px; font-weight: 500; color: var(--primary); margin-bottom: 24px; animation: fadeInUp 0.6s ease; }
+    .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; animation: fadeInUp 0.6s ease 0.1s both; }
+    .hero h1 span { background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-description { font-size: 18px; color: var(--text-light); margin-bottom: 32px; max-width: 480px; animation: fadeInUp 0.6s ease 0.2s both; }
+    .hero-search { display: flex; gap: 12px; margin-bottom: 40px; animation: fadeInUp 0.6s ease 0.3s both; }
+    .search-input { flex: 1; position: relative; }
+    .search-input input { width: 100%; padding: 16px 16px 16px 48px; border: 2px solid var(--border); border-radius: 14px; font-size: 16px; font-family: inherit; transition: all 0.3s ease; background: var(--card); }
+    .search-input input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1); }
+    .search-input svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--text-light); }
+    .hero-stats { display: flex; gap: 40px; animation: fadeInUp 0.6s ease 0.4s both; }
+    .stat-item { text-align: left; }
+    .stat-value { font-size: 32px; font-weight: 800; color: var(--text); }
+    .stat-label { font-size: 14px; color: var(--text-light); }
+    .hero-image { position: relative; animation: fadeInRight 0.8s ease 0.2s both; }
+    .hero-image img { width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); }
+    
+    /* Floating Cards */
+    .floating-card { position: absolute; background: var(--card); border-radius: 16px; padding: 16px 20px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 12px; animation: float 3s ease-in-out infinite; }
+    .floating-card.card-1 { top: 20%; left: -40px; }
+    .floating-card.card-2 { bottom: 20%; right: -40px; animation-delay: 1.5s; }
+    .floating-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+    .floating-icon.orange { background: rgba(255, 107, 53, 0.1); }
+    .floating-icon.green { background: rgba(0, 184, 148, 0.1); }
+    .floating-text strong { display: block; font-size: 14px; color: var(--text); }
+    .floating-text span { font-size: 12px; color: var(--text-light); }
+
+    /* Sections */
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-tag { display: inline-block; padding: 8px 16px; background: rgba(255, 107, 53, 0.1); border-radius: 50px; font-size: 14px; font-weight: 600; color: var(--primary); margin-bottom: 16px; }
+    .section-title { font-size: 42px; font-weight: 800; margin-bottom: 16px; }
+    .section-subtitle { font-size: 18px; color: var(--text-light); max-width: 600px; margin: 0 auto; }
+    
+    /* Grids */
+    .categories-grid, .testimonials-grid, .featured-grid { display: grid; gap: 32px; }
+    .categories-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .featured-grid, .testimonials-grid { grid-template-columns: repeat(3, 1fr); }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+
+    /* Cards */
+    .category-card { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 1; cursor: pointer; transition: all 0.4s ease; }
+    .category-card:hover { transform: scale(1.03); }
+    .category-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .category-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.8) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; }
+    .category-name { font-size: 22px; font-weight: 700; color: white; margin-bottom: 4px; }
+    
+    .restaurant-card { background: var(--background); border-radius: 20px; overflow: hidden; transition: all 0.3s ease; }
+    .restaurant-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .restaurant-image { position: relative; height: 180px; overflow: hidden; }
+    .restaurant-image img { width: 100%; height: 100%; object-fit: cover; }
+    .restaurant-badge { position: absolute; top: 12px; left: 12px; padding: 6px 12px; background: var(--accent); color: white; border-radius: 8px; font-size: 12px; font-weight: 600; }
+    .restaurant-info { padding: 20px; }
+    .restaurant-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .restaurant-meta { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--text-light); margin-bottom: 12px; }
+    .rating { color: #f1c40f; }
+    .tag { padding: 4px 10px; background: rgba(255, 107, 53, 0.1); color: var(--primary); border-radius: 6px; font-size: 12px; font-weight: 500; }
+
+    .testimonial-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 32px; transition: all 0.3s ease; }
+    .testimonial-card:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-4px); }
+    .testimonial-stars { color: #f1c40f; margin-bottom: 16px; }
+    .testimonial-text { margin-bottom: 24px; color: rgba(255,255,255,0.9); }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--gradient-hero); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+
+    /* Sections Padding & Colors */
+    .how-it-works, .featured { padding: 100px 0; background: var(--card); }
+    .categories, .cta { padding: 100px 0; background: var(--background); }
+    .testimonials { padding: 100px 0; background: var(--gradient-dark); color: white; }
+    
+    .step-card { text-align: center; padding: 40px 32px; border-radius: 24px; background: var(--background); transition: all 0.3s ease; position: relative; }
+    .step-icon { width: 80px; height: 80px; margin: 0 auto 24px; background: var(--gradient-hero); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 36px; box-shadow: var(--shadow-glow); }
+    
+    .cta-card { background: var(--gradient-hero); border-radius: 32px; padding: 80px; text-align: center; position: relative; overflow: hidden; }
+    .cta-title { font-size: 42px; font-weight: 800; color: white; margin-bottom: 16px; }
+    .cta-subtitle { font-size: 18px; color: rgba(255,255,255,0.9); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; }
+    .btn-white { background: white; color: var(--primary); }
+    .btn-ghost-white { border: 2px solid white; color: white; }
+
+    /* Footer */
+    .footer { padding: 80px 0 32px; background: var(--secondary); color: white; }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 48px; margin-bottom: 48px; }
+    .social-links { display: flex; gap: 12px; margin-top: 16px; }
+    .social-link { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; }
+    .footer-column h4 { font-weight: 700; margin-bottom: 20px; }
+    .footer-column ul { display: flex; flex-direction: column; gap: 12px; }
+    .footer-column a { color: rgba(255,255,255,0.7); }
+    .footer-bottom { padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 14px; color: rgba(255,255,255,0.6); }
+
+    /* Animations */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* Responsive */
     @media (max-width: 1024px) {
-      .hero .container {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-      }
-
-      .hero-description {
-        margin: 0 auto 32px;
-      }
-
-      .hero-stats {
-        justify-content: center;
-      }
-
-      .hero-image {
-        max-width: 500px;
-        margin: 0 auto;
-      }
-
-      .floating-card {
-        display: none;
-      }
-
-      .steps-grid,
-      .featured-grid,
-      .testimonials-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .categories-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .hero .container { grid-template-columns: 1fr; text-align: center; }
+      .hero-image { margin-top: 40px; }
+      .categories-grid { grid-template-columns: repeat(2, 1fr); }
+      .featured-grid, .testimonials-grid, .steps-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .mobile-menu-btn {
-        display: flex;
-      }
-
-      .hero {
-        padding: 120px 0 60px;
-      }
-
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      .section-title {
-        font-size: 32px;
-      }
-
-      .hero-search {
-        flex-direction: column;
-      }
-
-      .hero-stats {
-        flex-wrap: wrap;
-        gap: 24px;
-      }
-
-      .steps-grid,
-      .featured-grid,
-      .testimonials-grid,
-      .categories-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cta-card {
-        padding: 48px 24px;
-      }
-
-      .cta-title {
-        font-size: 28px;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .social-links {
-        justify-content: center;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 16px;
-        text-align: center;
-      }
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .hero-stats { justify-content: center; }
+      .featured-grid, .testimonials-grid, .steps-grid, .footer-grid { grid-template-columns: 1fr; }
+      .cta-buttons { flex-direction: column; }
     }
   </style>
 </head>
@@ -1047,9 +161,8 @@
       
       <ul class="nav-links">
         <li><a href="#home">Início</a></li>
-        <li><a href="#how-it-works">Como Funciona</a></li>
-        <li><a href="#categories">Categorias</a></li>
-        <li><a href="#restaurants">Restaurantes</a></li>
+        <li><a href="#menu">Cardápio</a></li>
+        <li><a href="#about">Sobre</a></li>
         <li><a href="#testimonials">Avaliações</a></li>
       </ul>
       
@@ -1059,9 +172,7 @@
       </div>
       
       <button class="mobile-menu-btn">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
@@ -1070,255 +181,121 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-badge">
-          🔥 Mais de 1000 restaurantes parceiros
+          🔥 O sabor preferido da cidade
         </div>
-        
         <h1>
           Sua comida favorita<br>
-          <span>entregue na sua porta</span>
+          <span>entregue quentinha</span>
         </h1>
-        
         <p class="hero-description">
-          Descubra os melhores restaurantes da sua região. Pedidos rápidos, entrega segura e comida fresquinha sempre.
+          Ingredientes frescos, receitas exclusivas e entrega super rápida. Peça agora e surpreenda seu paladar.
         </p>
-        
         <div class="hero-search">
           <div class="search-input">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input type="text" placeholder="Busque por restaurante ou prato...">
+            <input type="text" placeholder="Qual a sua fome de hoje?">
           </div>
-          <button class="btn btn-primary">Buscar</button>
+          <button class="btn btn-primary">Ver Cardápio</button>
         </div>
-        
         <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-value">+1000</div>
-            <div class="stat-label">Restaurantes</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">+50k</div>
-            <div class="stat-label">Clientes Felizes</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">4.9★</div>
-            <div class="stat-label">Avaliação Média</div>
-          </div>
+          <div class="stat-item"><div class="stat-value">30min</div><div class="stat-label">Entrega Média</div></div>
+          <div class="stat-item"><div class="stat-value">+10k</div><div class="stat-label">Clientes Felizes</div></div>
+          <div class="stat-item"><div class="stat-value">4.9★</div><div class="stat-label">Avaliação</div></div>
         </div>
       </div>
-      
       <div class="hero-image">
         <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=500&fit=crop" alt="Comida deliciosa">
-        
         <div class="floating-card card-1">
           <div class="floating-icon orange">🍕</div>
-          <div class="floating-text">
-            <strong>Pizza Margherita</strong>
-            <span>Entrega em 25 min</span>
-          </div>
+          <div class="floating-text"><strong>Forno a Lenha</strong><span>Sabor autêntico</span></div>
         </div>
-        
         <div class="floating-card card-2">
           <div class="floating-icon green">✓</div>
-          <div class="floating-text">
-            <strong>Pedido Confirmado!</strong>
-            <span>Saindo para entrega</span>
-          </div>
+          <div class="floating-text"><strong>Ingredientes Frescos</strong><span>Selecionados hoje</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="how-it-works" id="how-it-works">
+  <section class="categories" id="menu">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Como Funciona</span>
-        <h2 class="section-title">Pedir nunca foi tão fácil</h2>
-        <p class="section-subtitle">Em apenas 3 passos simples você recebe sua comida favorita em casa</p>
+        <span class="section-tag">Nosso Cardápio</span>
+        <h2 class="section-title">Explore nossas delícias</h2>
+        <p class="section-subtitle">De lanches rápidos a pratos completos, temos tudo para matar sua fome.</p>
       </div>
-      
-      <div class="steps-grid">
-        <div class="step-card">
-          <span class="step-number">01</span>
-          <div class="step-icon">📍</div>
-          <h3 class="step-title">Escolha sua Localização</h3>
-          <p class="step-description">Informe seu endereço e encontre os melhores restaurantes próximos a você</p>
-        </div>
-        
-        <div class="step-card">
-          <span class="step-number">02</span>
-          <div class="step-icon">🍔</div>
-          <h3 class="step-title">Escolha seu Pedido</h3>
-          <p class="step-description">Navegue pelos cardápios e selecione seus pratos favoritos com facilidade</p>
-        </div>
-        
-        <div class="step-card">
-          <span class="step-number">03</span>
-          <div class="step-icon">🚀</div>
-          <h3 class="step-title">Entrega Rápida</h3>
-          <p class="step-description">Acompanhe seu pedido em tempo real até chegar quentinho na sua casa</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="categories" id="categories">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Categorias</span>
-        <h2 class="section-title">Explore por tipo de culinária</h2>
-        <p class="section-subtitle">Escolha sua categoria favorita e descubra sabores incríveis</p>
-      </div>
-      
       <div class="categories-grid">
         <div class="category-card">
           <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=400&fit=crop" alt="Pizza">
-          <div class="category-overlay">
-            <h3 class="category-name">Pizzas</h3>
-            <span class="category-count">150+ restaurantes</span>
-          </div>
+          <div class="category-overlay"><h3 class="category-name">Pizzas</h3></div>
         </div>
-        
         <div class="category-card">
           <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=400&fit=crop" alt="Hambúrguer">
-          <div class="category-overlay">
-            <h3 class="category-name">Hambúrgueres</h3>
-            <span class="category-count">120+ restaurantes</span>
-          </div>
+          <div class="category-overlay"><h3 class="category-name">Burgers</h3></div>
         </div>
-        
         <div class="category-card">
           <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&h=400&fit=crop" alt="Sushi">
-          <div class="category-overlay">
-            <h3 class="category-name">Japonesa</h3>
-            <span class="category-count">80+ restaurantes</span>
-          </div>
+          <div class="category-overlay"><h3 class="category-name">Japonesa</h3></div>
         </div>
-        
         <div class="category-card">
           <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=400&fit=crop" alt="Brasileira">
-          <div class="category-overlay">
-            <h3 class="category-name">Brasileira</h3>
-            <span class="category-count">200+ restaurantes</span>
-          </div>
+          <div class="category-overlay"><h3 class="category-name">Brasileira</h3></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="featured" id="restaurants">
+  <section class="featured">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Destaques</span>
-        <h2 class="section-title">Restaurantes em alta</h2>
-        <p class="section-subtitle">Os mais pedidos e bem avaliados da semana</p>
+        <span class="section-tag">Favoritos</span>
+        <h2 class="section-title">Destaques do Cardápio</h2>
+        <p class="section-subtitle">Os pratos mais pedidos da semana pelos nossos clientes.</p>
       </div>
-      
       <div class="featured-grid">
         <div class="restaurant-card">
           <div class="restaurant-image">
-            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=250&fit=crop" alt="Restaurante">
-            <span class="restaurant-badge">Grátis</span>
-            <div class="restaurant-favorite">♡</div>
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=250&fit=crop" alt="Pizza">
+            <span class="restaurant-badge">Promoção</span>
           </div>
           <div class="restaurant-info">
-            <h3 class="restaurant-name">Pizzaria Bella Napoli</h3>
-            <div class="restaurant-meta">
-              <span class="rating">★ 4.8</span>
-              <span>25-35 min</span>
-              <span>2.5 km</span>
-            </div>
-            <div class="restaurant-tags">
-              <span class="tag">Pizza</span>
-              <span class="tag">Italiana</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="restaurant-card">
-          <div class="restaurant-image">
-            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=250&fit=crop" alt="Restaurante">
-            <span class="restaurant-badge">Novo</span>
-            <div class="restaurant-favorite">♡</div>
-          </div>
-          <div class="restaurant-info">
-            <h3 class="restaurant-name">Burger House Premium</h3>
+            <h3 class="restaurant-name">Pizza Moda da Casa</h3>
             <div class="restaurant-meta">
               <span class="rating">★ 4.9</span>
-              <span>20-30 min</span>
-              <span>1.8 km</span>
+              <span>Serve 3 pessoas</span>
             </div>
             <div class="restaurant-tags">
-              <span class="tag">Burger</span>
-              <span class="tag">Americana</span>
+              <span class="tag">Bacon</span> <span class="tag">Catupiry</span>
             </div>
           </div>
         </div>
-        
         <div class="restaurant-card">
           <div class="restaurant-image">
-            <img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=400&h=250&fit=crop" alt="Restaurante">
-            <div class="restaurant-favorite">♡</div>
+            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=250&fit=crop" alt="Burger">
+            <span class="restaurant-badge">Novo</span>
           </div>
           <div class="restaurant-info">
-            <h3 class="restaurant-name">Sushi Zen Experience</h3>
+            <h3 class="restaurant-name">X-Monstro Duplo</h3>
             <div class="restaurant-meta">
-              <span class="rating">★ 4.7</span>
-              <span>40-50 min</span>
-              <span>3.2 km</span>
+              <span class="rating">★ 5.0</span>
+              <span>Individual</span>
             </div>
             <div class="restaurant-tags">
-              <span class="tag">Sushi</span>
-              <span class="tag">Japonesa</span>
+              <span class="tag">Artesanal</span> <span class="tag">Cheddar</span>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Avaliações</span>
-        <h2 class="section-title">O que nossos clientes dizem</h2>
-        <p class="section-subtitle">Milhares de clientes satisfeitos com nosso serviço</p>
-      </div>
-      
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"O app é super fácil de usar e a entrega sempre chega no tempo prometido. Virei cliente fiel!"</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">M</div>
-            <div>
-              <div class="author-name">Marina Silva</div>
-              <div class="author-location">São Paulo, SP</div>
-            </div>
+        <div class="restaurant-card">
+          <div class="restaurant-image">
+            <img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=400&h=250&fit=crop" alt="Sushi">
           </div>
-        </div>
-        
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Variedade incrível de restaurantes! Sempre encontro o que procuro. Recomendo demais!"</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">R</div>
-            <div>
-              <div class="author-name">Rafael Costa</div>
-              <div class="author-location">Rio de Janeiro, RJ</div>
+          <div class="restaurant-info">
+            <h3 class="restaurant-name">Combo Sushi Family</h3>
+            <div class="restaurant-meta">
+              <span class="rating">★ 4.8</span>
+              <span>40 peças</span>
             </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Atendimento ao cliente excepcional. Tive um problema e foi resolvido em minutos!"</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">A</div>
-            <div>
-              <div class="author-name">Ana Oliveira</div>
-              <div class="author-location">Belo Horizonte, MG</div>
+            <div class="restaurant-tags">
+              <span class="tag">Salmão</span> <span class="tag">Fresco</span>
             </div>
           </div>
         </div>
@@ -1330,11 +307,10 @@
     <div class="container">
       <div class="cta-card">
         <div class="cta-content">
-          <h2 class="cta-title">Pronto para pedir?</h2>
-          <p class="cta-subtitle">Baixe nosso app e ganhe R$15 de desconto no primeiro pedido!</p>
+          <h2 class="cta-title">Fome de quê?</h2>
+          <p class="cta-subtitle">Faça seu pedido agora e ganhe 10% de desconto na primeira compra!</p>
           <div class="cta-buttons">
-            <button class="btn btn-white">Baixar App</button>
-            <a href="#how-it-works" class="btn btn-ghost-white">Saiba Mais</a>
+            <button class="btn btn-white">Fazer Pedido</button>
           </div>
         </div>
       </div>
@@ -1346,67 +322,80 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo">UAIfood</div>
-          <p>A melhor plataforma de delivery de comida do Brasil. Peça fácil, receba rápido.</p>
+          <p>O sabor que você ama, entregue com o carinho que você merece.</p>
           <div class="social-links">
             <a href="#" class="social-link">📘</a>
             <a href="#" class="social-link">📸</a>
             <a href="#" class="social-link">🐦</a>
-            <a href="#" class="social-link">▶️</a>
           </div>
         </div>
-        
         <div class="footer-column">
-          <h4>Empresa</h4>
+          <h4>Institucional</h4>
           <ul>
             <li><a href="#">Sobre Nós</a></li>
-            <li><a href="#">Carreiras</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Imprensa</a></li>
+            <li><a href="#">Localização</a></li>
+            <li><a href="#">Contato</a></li>
           </ul>
         </div>
-        
         <div class="footer-column">
-          <h4>Para Você</h4>
+          <h4>Ajuda</h4>
           <ul>
-            <li><a href="#">Como Funciona</a></li>
-            <li><a href="#">Programa de Pontos</a></li>
-            <li><a href="#">Cupons</a></li>
-            <li><a href="#">Suporte</a></li>
+            <li><a href="#">Meus Pedidos</a></li>
+            <li><a href="#">Política de Entrega</a></li>
+            <li><a href="#">Fale Conosco</a></li>
           </ul>
         </div>
-        
         <div class="footer-column">
-          <h4>Parceiros</h4>
+          <h4>Desenvolvedores</h4>
           <ul>
-            <li><a href="#">Seja Parceiro</a></li>
-            <li><a href="#">Seja Entregador</a></li>
-            <li><a href="#">Portal do Parceiro</a></li>
-            <li><a href="/api-docs">API (Documentação)</a></li>
+            <li><a href="/api-docs">Documentação (API)</a></li>
           </ul>
         </div>
       </div>
-      
       <div class="footer-bottom">
-        <p>© 2024 UAIfood. Todos os direitos reservados.</p>
-        <div class="footer-bottom-links">
-          <a href="#">Termos de Uso</a>
-          <a href="#">Privacidade</a>
-          <a href="#">Cookies</a>
-        </div>
+        <p>© 2025 UAIfood. Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>
 
-<script>
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
         const token = localStorage.getItem('token');
         const nome = localStorage.getItem('usuarioNome');
         const navButtons = document.querySelector('.nav-buttons');
+        const navLinks = document.querySelector('.nav-links');
 
-        // Se tiver token e nome salvos, o usuário está logado
         if (token && nome) {
-            // Pega o primeiro nome para não ficar muito longo
             const primeiroNome = nome.split(' ')[0];
+
+            // MENU ADMIN (MODO RESTAURANTE ÚNICO)
+            if (nome.toLowerCase() === 'admin') {
+                const liCadastros = document.createElement('li');
+                liCadastros.style.position = 'relative';
+                liCadastros.innerHTML = `
+                    <a href="#" style="color: var(--primary); font-weight: bold; display: flex; align-items: center; gap: 5px;">
+                        Admin <span>▾</span>
+                    </a>
+                    <ul class="dropdown-menu" style="
+                        position: absolute; top: 100%; left: 0; background: white; padding: 10px;
+                        border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: none;
+                        flex-direction: column; gap: 10px; min-width: 180px; list-style: none;
+                        z-index: 1000; border: 1px solid var(--border);
+                    ">
+                        <li>
+                            <a href="/produtos" style="color: var(--text); font-size: 14px; display: block; padding: 5px;">
+                                🍔 Gerenciar Cardápio
+                            </a>
+                        </li>
+                    </ul>
+                `;
+
+                const dropdown = liCadastros.querySelector('.dropdown-menu');
+                liCadastros.addEventListener('mouseenter', () => { dropdown.style.display = 'flex'; });
+                liCadastros.addEventListener('mouseleave', () => { dropdown.style.display = 'none'; });
+
+                navLinks.insertBefore(liCadastros, navLinks.firstChild);
+            }
 
             navButtons.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 15px;">
@@ -1422,12 +411,11 @@
     });
 
     function fazerLogout() {
-        // Limpa os dados e recarrega a página
         localStorage.removeItem('token');
         localStorage.removeItem('usuarioNome');
         window.location.reload();
     }
-</script>
+  </script>
 
 </body>
 </html>

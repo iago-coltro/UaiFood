@@ -6,26 +6,25 @@ const swaggerDocs = require('./src/configs/swaggerConfig');
 
 // Importação das Rotas da API
 const usuarioRoutes = require('./src/routes/usuarios');
-const restauranteRoutes = require('./src/routes/restaurantes'); // Nova rota que criamos
-
+const produtoRoutes = require('./src/routes/produtos'); 
 const app = express();
 
 // Configurações do Express
 app.use(express.json()); // Permite ler JSON no corpo das requisições
 app.use(express.static(path.join(__dirname, 'public'))); // Serve os arquivos HTML/CSS/JS
 
-// Middleware de Log
+// Middleware de Log (opcional, para ver as requisições no terminal)
 app.use((req, res, next) => {
   console.log(`[${new Date().toLocaleTimeString()}] ${req.method} ${req.url}`);
   next();
 });
 
-// --- DOCUMENTAÇÃO ---
+// --- DOCUMENTAÇÃO SWAGGER ---
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // --- ROTAS DA API ---
 app.use(usuarioRoutes);
-app.use(restauranteRoutes);
+app.use(produtoRoutes);
 
 // --- ROTAS DE PÁGINAS (FRONTEND) ---
 
@@ -44,9 +43,9 @@ app.get('/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'cadastro.html'));
 });
 
-// 4. Página de Cadastro de Parceiro (Restaurante)
-app.get('/parceiro', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'parceiro.html'));
+// 4. Página de Cadastro de Itens (Cardápio)
+app.get('/produtos', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'produtos.html'));
 });
 
 // Inicialização do Servidor
